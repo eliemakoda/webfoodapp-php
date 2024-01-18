@@ -1,9 +1,6 @@
 <?php require './config/Header.php';
 ?>
-		<!-- /. NAVIGATION ENDS
-			========================================================================= -->
-		<!-- REVOLUTION SLIDER STARTS
-			========================================================================= -->
+		
 		<div id="rev_slider_467_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="classic-carousel26" data-source="gallery" style="margin:0px auto;background-color:#ffffff;padding:0px;margin-top:0px;margin-bottom:0px;">
 			<!-- START REVOLUTION SLIDER 5.3.0.2 fullwidth mode -->
 			<div id="rev_slider_467_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.3.0.2">
@@ -647,6 +644,7 @@
 								</p>
 								<div class="description animated" data-animation="fadeInUp" data-animation-delay="600">One morning, when Gregor Samsa woke from troubled dreams, he found himself<br>transformed in his bed into a horrible vermin. </div>
 							</div>
+							Image de <a href="https://fr.freepik.com/photos-gratuite/portrait-homme-souriant_11379781.htm#query=jeune%20homme%20noir%20souriant&position=2&from_view=keyword&track=ais&uuid=da66e2cf-043a-485b-8b07-8e6270f9ceee">Freepik de aaron</a>
 						</div>
 					</div>
 					<div class="row">

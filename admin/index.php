@@ -23,33 +23,33 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav side-nav" >
           <li class="nav-item">
-            <a class="nav-link text-white" style="margin-left: 20px;" href="index.html">Home
+            <a class="nav-link text-white" style="margin-left: 20px;" href="index.php">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admins/admins.html" style="margin-left: 20px;">Admins</a>
+            <a class="nav-link" href="admins/admins.php" style="margin-left: 20px;">Admins</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="categories-admins/show-categories.html" style="margin-left: 20px;">Categories</a>
+            <a class="nav-link" href="categories-admins/show-categories.php" style="margin-left: 20px;">Categories</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="products-admins/show-products.html" style="margin-left: 20px;">Products</a>
+            <a class="nav-link" href="products-admins/show-products.php" style="margin-left: 20px;">Products</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="orders-admins/show-orders.html" style="margin-left: 20px;">Orders</a>
+            <a class="nav-link" href="orders-admins/show-orders.php" style="margin-left: 20px;">Orders</a>
           </li>
         
         </ul>
         <ul class="navbar-nav ml-md-auto d-md-flex">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Home
+            <a class="nav-link" href="index.php">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admins/login-admins.html">login
+            <a class="nav-link" href="admins/login-admins.php">login
               <span class="sr-only">(current)</span>
             </a>
           </li>

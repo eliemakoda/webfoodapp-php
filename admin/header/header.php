@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,24 +24,24 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav side-nav" >
           <li class="nav-item">
-            <a class="nav-link" style="margin-left: 20px;" href="../index.html">Home
+            <a class="nav-link" style="margin-left: 20px;" href="../index.php">Accueil
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admins.html" style="margin-left: 20px;">Admins</a>
+            <a class="nav-link" href="admins.php" style="margin-left: 20px;">Admins</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../categories-admins/show-categories.html" style="margin-left: 20px;">Categories</a>
+            <a class="nav-link" href="../menus/menus.php" style="margin-left: 20px;">Menus</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../products-admins/show-products.html" style="margin-left: 20px;">Products</a>
+            <a class="nav-link" href="../products-admins/show-products.php" style="margin-left: 20px;">Produits</a>
           </li>
          
         </ul>
         <ul class="navbar-nav ml-md-auto d-md-flex">
           <li class="nav-item">
-            <a class="nav-link" href="../index.html">Home
+            <a class="nav-link" href="../index.php">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -58,53 +59,3 @@
       </div>
     </div>
     </nav>
-    <div class="container-fluid">
-
-          <div class="row">
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title mb-4 d-inline">Admins</h5>
-             <a  href="create-admins.html" class="btn btn-primary mb-4 text-center float-right">Create Admins</a>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">username</th>
-                    <th scope="col">email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                   
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                   
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                   
-                  </tr>
-                </tbody>
-              </table> 
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-  </div>
-<script type="text/javascript">
-
-</script>
-</body>
-</html>
