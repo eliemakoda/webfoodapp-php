@@ -1,13 +1,13 @@
 <?php
 require '../../config/app.php';
 $app=   new App;
-$req = "SELECT * FROM categorie WHERE 1";
-$categorie= $app->SelectionnerTout($req);
+$req = "SELECT * FROM reservation WHERE 1";
+$reserv= $app->SelectionnerTout($req);
 if(isset($_GET['id_sup']))
 {
   $id=$_GET['id_sup'];
-  $req=  "DELETE FROM categorie WHERE id=$id";
-  $app->supprimer($req,"./categorie.php");
+  $req=  "DELETE FROM reservation WHERE id=$id";
+  $app->supprimer($req,"./reservation.php");
 }
 require '../header/header.php';
 ?>
@@ -17,31 +17,36 @@ require '../header/header.php';
         <div class="col">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title mb-4 d-inline">Categories</h5>
-             <a  href="create-categorie.php" class="btn btn-primary mb-4 text-center float-right">Creer une catgorie</a>
+              <h5 class="card-title mb-4 d-inline">Reservation</h5>
               <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Nom </th>
+                    <th scope="col">email</th>
+                    <th scope="col">Date </th>
+                    <th scope="col">Tel </th>
+                    <th scope="col">Message </th>
                     <th scope="col">Action</th>
 
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  if (isset($categorie)&& ($categorie!=null)):
+                  if (isset($reserv)&& ($reserv!=null)):
                     $i=0;
-                  foreach($categorie as $cat):
+                  foreach($reserv as $res):
                       $i=$i+1;
                   ?>
                   <tr>
                     <th scope="row"><?php echo $i; ?></th>
-                    <td><?php echo $cat->nom; ?></td>
-                    <td><?php echo $cat->description; ?></td>
-                    <td><a  type="submit" href="./categorie.php?id_sup=<?php echo $cat->id; ?>" class="btn btn-danger">supprimer</a>
-                    <a type="submit" href="./create-categorie.php?id_modif=<?php echo $cat->id; ?>" class="btn btn-info">Modifier</a>
+                    <td><?php echo $res->name; ?></td>
+                    <td><?php echo $res->email; ?></td>
+                    <td><?php echo $res->date_livraison; ?></td>
+                    <td><?php echo $res->phone; ?></td>
+                    <td><?php echo $res->message; ?></td>
+
+                    <td><a  type="submit" href="./reservation.php?id_sup=<?php echo $res->id; ?>" class="btn btn-danger">supprimer</a>
                   </td>
 
                   </tr>

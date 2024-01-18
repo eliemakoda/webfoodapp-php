@@ -29,15 +29,26 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admins.php" style="margin-left: 20px;">Admins</a>
+            <a class="nav-link" href="../admins/admins.php" style="margin-left: 20px;">Admins</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../menus/menus.php" style="margin-left: 20px;">Menus</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../products-admins/show-products.php" style="margin-left: 20px;">Produits</a>
+            <a class="nav-link" href="../categorie/categorie.php" style="margin-left: 20px;">categorie</a>
           </li>
-         
+          <li class="nav-item">
+            <a class="nav-link" href="../blog/blog.php" style="margin-left: 20px;">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../reservation/reservation.php" style="margin-left: 20px;">Reservation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../contact/contact.php" style="margin-left: 20px;">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../newsletter/news.php" style="margin-left: 20px;">News Letter</a>
+          </li>
         </ul>
         <ul class="navbar-nav ml-md-auto d-md-flex">
           <li class="nav-item">

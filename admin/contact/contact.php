@@ -1,13 +1,13 @@
 <?php
 require '../../config/app.php';
 $app=   new App;
-$req = "SELECT * FROM categorie WHERE 1";
-$categorie= $app->SelectionnerTout($req);
+$req = "SELECT * FROM contact WHERE 1";
+$contact= $app->SelectionnerTout($req);
 if(isset($_GET['id_sup']))
 {
   $id=$_GET['id_sup'];
-  $req=  "DELETE FROM categorie WHERE id=$id";
-  $app->supprimer($req,"./categorie.php");
+  $req=  "DELETE FROM contact WHERE id=$id";
+  $app->supprimer($req,"./contact.php");
 }
 require '../header/header.php';
 ?>
@@ -17,13 +17,13 @@ require '../header/header.php';
         <div class="col">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title mb-4 d-inline">Categories</h5>
-             <a  href="create-categorie.php" class="btn btn-primary mb-4 text-center float-right">Creer une catgorie</a>
+              <h5 class="card-title mb-4 d-inline">Contact</h5>
               <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nom</th>
+                    <th scope="col">email</th>
                     <th scope="col">Description</th>
                     <th scope="col">Action</th>
 
@@ -31,17 +31,17 @@ require '../header/header.php';
                 </thead>
                 <tbody>
                   <?php
-                  if (isset($categorie)&& ($categorie!=null)):
+                  if (isset($contact)&& ($contact!=null)):
                     $i=0;
-                  foreach($categorie as $cat):
+                  foreach($contact as $cont):
                       $i=$i+1;
                   ?>
                   <tr>
                     <th scope="row"><?php echo $i; ?></th>
-                    <td><?php echo $cat->nom; ?></td>
-                    <td><?php echo $cat->description; ?></td>
-                    <td><a  type="submit" href="./categorie.php?id_sup=<?php echo $cat->id; ?>" class="btn btn-danger">supprimer</a>
-                    <a type="submit" href="./create-categorie.php?id_modif=<?php echo $cat->id; ?>" class="btn btn-info">Modifier</a>
+                    <td><?php echo $cont->fullname; ?></td>
+                    <td><?php echo $cont->email; ?></td>
+                    <td><?php echo $cont->message; ?></td>
+                    <td><a  type="submit" href="./contact.php?id_sup=<?php echo $cont->id; ?>" class="btn btn-danger">supprimer</a>
                   </td>
 
                   </tr>

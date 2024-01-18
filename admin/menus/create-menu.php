@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) { // Récupérer les données du formulaire
     "id_categorie" => $category,
     "id_admin" => $id_admin
   ];
-  $req = "INSERT INTO menu(nom, quantite, px, description1, description2, images, id_categorie, id_admin) VALUES (:nom, :quantite, :px, :description1, :description2, :images, :id_categorie, :id_admin)";
+  $req = "INSERT INTO menu(nom, quantite, px, description1, description2, images, id_categorie, id_admin) VALUES(:nom, :quantite, :px, :description1, :description2, :images, :id_categorie, :id_admin)";
   $destination="./menus.php";
   $monapp->inserer($req, $valeurs, $destination);
 }
