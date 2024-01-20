@@ -1,4 +1,9 @@
-<?php require './config/Header.php';
+<?php 
+require './config/app.php';
+$req="SELECT * FROM categorie WHERE 1;";
+$apps= new App;
+$categorie= $apps->SelectionnerTout($req);
+require './config/Header.php';
 ?>
 		
 		<div id="rev_slider_467_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="classic-carousel26" data-source="gallery" style="margin:0px auto;background-color:#ffffff;padding:0px;margin-top:0px;margin-bottom:0px;">
@@ -385,177 +390,47 @@
 						</div>
 					</div>
 					<div class="menu-carousel animated" data-animation="fadeInUp" data-animation-delay="1000">
-						<!-- Column Starts -->
-						<div class="block">
-							<div class="picture">
-								<img src="images/menu/1.jpg" class="img-responsive center-block" alt="">
-								<h2>Breakfast</h2>
-							</div>
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">IMPORTED OYSTERS GRILL</a><span class="price pull-right">$66 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">SPICY CRAB RAMEN</a><span class="price pull-right">$30 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">SPICY CRAB RAMEN</a><span class="price pull-right">$92 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">ITALIAN SOURCE MUSHROOM</a><span class="price pull-right">$25 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-						<!-- Column Starts -->
-						<div class="block">
-							<div class="picture">
-								<img src="images/menu/2.jpg" class="img-responsive center-block" alt="">
-								<h2>Launch</h2>
-							</div>
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-						<!-- Column Starts -->
-						<div class="block">
-							<div class="picture">
-								<img src="images/menu/3.jpg" class="img-responsive center-block" alt="">
-								<h2>Dinner</h2>
-							</div>
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED CHICKEN SALAD</a><span class="price pull-right">$66 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">SPICY CRAB RAMEN</a><span class="price pull-right">$30 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">SPICY CRAB RAMEN</a><span class="price pull-right">$92 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">ITALIAN SOURCE MUSHROOM</a><span class="price pull-right">$25 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-						<!-- Column Starts -->
-						<div class="block">
-							<div class="picture">
-								<img src="images/menu/4.jpg" class="img-responsive center-block" alt="">
-								<h2>Deserts</h2>
-							</div>
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">IMPORTED OYSTERS GRILL</a><span class="price pull-right">$66 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">SPICY CRAB RAMEN</a><span class="price pull-right">$30 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">SPICY CRAB RAMEN</a><span class="price pull-right">$92 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">ITALIAN SOURCE MUSHROOM</a><span class="price pull-right">$25 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-						<!-- Column Starts -->
-						<div class="block">
-							<div class="picture">
-								<img src="images/menu/5.jpg" class="img-responsive center-block" alt="">
-								<h2>Drinks</h2>
-							</div>
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->					
-					</div>
+    <!-- Column Starts -->
+    <?php
+    if (isset($categorie) && ($categorie != null)) {
+        $i = 0;
+
+        foreach ($categorie as $cat) {
+            if ($i > 3) {
+                $i = 1;
+            }
+            $i += 1;
+    ?>
+            <div class="block">
+                <div class="picture">
+                    <img src="images/menu/<?php echo $i; ?>.jpg" class="img-responsive center-block" alt="">
+                    <h2><?php echo $cat->nom; ?></h2>
+                </div>
+                <div class="menu-list">
+                    <?php
+                    $req = "SELECT * FROM menu where id_categorie=$cat->id;";
+                    $menus = $apps->SelectionnerTout($req);
+                    if (isset($menus) && ($menus != null)) {
+                        foreach ($menus as $men) {
+                    ?>
+                            <!-- Menu Item Starts -->
+                            <div class="menu-item">
+                                <h1><a href="menu-details.php?id_menu=<?php echo $men->id; ?>"><?php echo $men->nom; ?></a><span class="price pull-right"><?php echo $men->px; ?> FCFA<a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
+                                <div class="description"><?php echo $men->description1; ?> </div>
+                            </div>
+                    <?php
+                        }
+                    }
+                    ?>
+
+                </div>
+            </div>
+    <?php
+        }
+    }
+    ?>
+</div>
+
 				</div>
 			</div>
 			<!-- /. MENU ENDS
@@ -719,12 +594,12 @@
 				<div class="row row1">
 					<div class="col-lg-4 col-lg-offset-4">
 						<div class="herotext animated" data-animation="fadeInUp" data-animation-delay="400">
-							<h1>STAY UP TO DATE</h1>
-							<div class="description">Sign up to  newsletter for the latest on all things Suitsupply</div>
+							<h1>Restez informer!</h1>
+							<div class="description">Inscrivez-vous à notre  newsletter </div>
 						</div>
-						<form class="form-inline animated" data-animation="fadeInUp" data-animation-delay="600">
+						<form class="form-inline animated" data-animation="fadeInUp" data-animation-delay="600" method="POST" action="./index.php">
 							<div class="form-group">							
-								<input type="email" class="form-control" id="newsletter" placeholder="Enter you e-mail Address">
+								<input type="email" class="form-control" id="newsletter" placeholder="Entrez votre addresse mail">
 							</div>
 							<button type="submit" class="btn btn-default"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 						</form>

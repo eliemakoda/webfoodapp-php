@@ -1,4 +1,8 @@
 <?php
+require './config/app.php';
+$req="SELECT * FROM categorie WHERE 1;";
+$apps= new App;
+$categorie= $apps->SelectionnerTout($req);
 require './config/header.php';
 ?>
 		<div class="inner-banner title-area text-center image-5">
@@ -17,27 +21,36 @@ require './config/header.php';
 			<div class="menu breakfast-menu">
 				<div class="container-fluid">
 					<div class="row">
+						<?php
+						if(isset($categorie)&& ($categorie!=null)):
+							foreach($categorie as $cat):
+						?>
 						<div class="col-lg-12">
 							<div class="herotext animated" data-animation="fadeInUp" data-animation-delay="200">
 								<p class="box-heading">
-									<span>Breakfast</span>
+									<span><?php echo $cat->nom; ?></span>
 								</p>
 							</div>
 						</div>
 					</div>
 					<div class="row no-gutter-3">
+						<?php
+					$req = "SELECT * FROM menu where id_categorie=$cat->id;";
+                    $menus = $apps->SelectionnerTout($req);
+					if(isset($menus)&& ($menus!=null)):
+						foreach($menus as $men):
+							$img= explode(',',$men->images);
+							foreach($img as $im):
+						?>
 						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="400">
-							<img src="images/menu/breakfast/1.jpg" class="img-responsive center-block" alt="" >					
+							<img src="images/<?php echo $im; ?>" class="img-responsive center-block" alt=<?php echo $im;?> >					
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="500">
-							<img src="images/menu/breakfast/2.jpg" class="img-responsive center-block" alt="" >					
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="600">
-							<img src="images/menu/breakfast/3.jpg" class="img-responsive center-block" alt="" >					
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="700">
-							<img src="images/menu/breakfast/4.jpg" class="img-responsive center-block" alt="" >					
-						</div>
+						<?php
+						endforeach;
+					endforeach;
+				endif;
+						?>
+					
 					</div>
 				</div>
 				<div class="container">
@@ -46,347 +59,33 @@ require './config/header.php';
 						<div class="col-lg-4 col-md-4 block animated" data-animation="fadeInUp" data-animation-delay="200">
 							<div class="menu-list">
 								<!-- Menu Item Starts -->
+								<?php
+									$req = "SELECT * FROM menu where id_categorie=$cat->id;";
+									$menus = $apps->SelectionnerTout($req);
+									if(isset($menus)&&($menus!=null)):
+								foreach($menus as $men):
+								?>
 								<div class="menu-item">
-									<h1><a href="menu-details.php">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
+									<h1><a href="menu-details.php?id_menu=<?php echo $men->id ?>"><?php echo $men->nom ?></a><span class="price pull-right"><?php echo $men->px ?> FCFA<a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
+									<div class="description"><?php echo $men->description1 ?></div>
 								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
+								<?php
+								endforeach;
+							endif;
+								?>
+								
 							</div>
 						</div>
-						<!-- Column Ends -->
-						<!-- Column Starts -->
-						<div class="col-lg-4 col-md-4 block animated" data-animation="fadeInUp" data-animation-delay="400">
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-						<!-- Column Starts -->
-						<div class="col-lg-4 col-md-4 block animated" data-animation="fadeInUp" data-animation-delay="600">
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
+						<?php
+					endforeach;
+					?>
 					</div>
+					<?php
+					endif;
+					?>
 				</div>
 			</div>
-			<!-- /. BREAKFAST MENU ENDS
-				========================================================================= -->						
-			<!-- LUNCH MENU STARTS
-				========================================================================= -->
-			<div class="light-texture-01 menu breakfast-menu">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="herotext animated" data-animation="fadeInUp" data-animation-delay="200">
-								<p class="box-heading">
-									<span>Lunch</span>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="row no-gutter-3">
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="400">
-							<img src="images/menu/lunch/1.jpg" class="img-responsive center-block" alt="" >					
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="500">
-							<img src="images/menu/lunch/2.jpg" class="img-responsive center-block" alt="" >					
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="600">
-							<img src="images/menu/lunch/3.jpg" class="img-responsive center-block" alt="" >					
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="700">
-							<img src="images/menu/lunch/4.jpg" class="img-responsive center-block" alt="" >					
-						</div>
-					</div>
-				</div>
-				<div class="container">
-					<div class="row">
-						<!-- Column Starts -->
-						<div class="col-lg-4 col-md-4 block animated" data-animation="fadeInUp" data-animation-delay="200">
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-						<!-- Column Starts -->
-						<div class="col-lg-4 col-md-4 block animated" data-animation="fadeInUp" data-animation-delay="400">
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="#addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-						<!-- Column Starts -->
-						<div class="col-lg-4 col-md-4 block animated" data-animation="fadeInUp" data-animation-delay="600">
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="#addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="#addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="#addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="menu-details.php">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="#addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-					</div>
-				</div>
-			</div>
-			<!-- /. LUNCH MENU ENDS
-				========================================================================= -->
-			<!-- DINNER MENU STARTS
-				========================================================================= -->
-			<div class="menu dinner-menu">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="herotext animated" data-animation="fadeInUp" data-animation-delay="200">
-								<p class="box-heading">
-									<span>Dinner</span>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="row no-gutter-3">
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="400">
-							<img src="images/menu/dinner/1.jpg" class="img-responsive center-block" alt="" >					
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="500">
-							<img src="images/menu/dinner/2.jpg" class="img-responsive center-block" alt="" >					
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="600">
-							<img src="images/menu/dinner/3.jpg" class="img-responsive center-block" alt="" >					
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="700">
-							<img src="images/menu/dinner/4.jpg" class="img-responsive center-block" alt="" >					
-						</div>
-					</div>
-				</div>
-				<div class="container">
-					<div class="row">
-						<!-- Column Starts -->
-						<div class="col-lg-4 col-md-4 block animated" data-animation="fadeInUp" data-animation-delay="200">
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-						<!-- Column Starts -->
-						<div class="col-lg-4 col-md-4 block animated" data-animation="fadeInUp" data-animation-delay="400">
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-						<!-- Column Starts -->
-						<div class="col-lg-4 col-md-4 block animated" data-animation="fadeInUp" data-animation-delay="600">
-							<div class="menu-list">
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">PORK WITH ITALIAN SALSA VERDE</a><span class="price pull-right">$66 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">FRESH CRAB WITH LEMON</a><span class="price pull-right">$30 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">FRIED CHICKEN SALAD</a><span class="price pull-right">$92 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-								<!-- Menu Item Starts -->
-								<div class="menu-item">
-									<h1><a href="#">FRIED POTATOES WITH GARLIC</a><span class="price pull-right">$25 <a href="#"><i class="fa fa-shopping-cart"></i></a></span></h1>
-									<div class="description">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. </div>
-								</div>
-								<!-- Menu Item Ends -->
-							</div>
-						</div>
-						<!-- Column Ends -->
-					</div>
-				</div>
-			</div>
-			<!-- /. DINNER MENU ENDS
-				========================================================================= -->	
+		
 			<!-- NEWSLETTER STARTS
 				========================================================================= -->  
 			<div class="container-fluid newsletter">
