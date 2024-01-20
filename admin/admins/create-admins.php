@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../../config/app.php';
 require '../header/header.php';
 ?>
@@ -9,7 +10,7 @@ $monapp=new App;
  {
      $nom= $_POST['username'];
      $email= $_POST['email'];
-     $password=$_POST['password'];
+     $password=  password_hash($_POST['password'],PASSWORD_DEFAULT);
      $requete = "INSERT INTO admin (nom,email,password) VALUES (:username,:email,:password)";
      $tab= [
          ":username"=>$nom,
@@ -24,7 +25,6 @@ if(isset($_POST['update']))
 {
   $nom= $_POST['username'];
   $email= $_POST['email'];
-  $password=$_POST['password'];
   $id=$_GET['id'];
   $req= "UPDATE `admin` SET `nom`='$nom',`email`='$email' WHERE id=$id";
   $monapp->maj($req, "./admins.php");

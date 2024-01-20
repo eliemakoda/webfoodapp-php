@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require '../../config/app.php';
 require '../header/header.php';
 ?>
@@ -11,15 +13,20 @@ $monapp=new App;
     $description=$_POST["description"];
     $images = $_FILES["images"];
     $urlsImages = [];
-    foreach ($images["tmp_name"] as $key => $tmp_name) {
-      $nomImage = $images["name"][$key];
-      $cheminImage = "../../images/" . $nomImage;
-      move_uploaded_file($tmp_name, $cheminImage);
-      // Stocker l'URL de l'image dans le tableau
-      $urlsImages[] = $cheminImage;
-    }
 
-     $requete = "INSERT INTO admin(title, description, images) VALUES(:title,:description,:images)";
+    $uploadDirectory ="../../images/";
+      
+    // Vérifier s'il y a des erreurs lors du téléchargement des images
+    if (!empty($_FILES["images"]["name"][0])) {
+        foreach ($_FILES["images"]["name"] as $key => $imageName) {
+            $imageTmpName = $_FILES["images"]["tmp_name"][$key];
+            $urlsImages[]=$imageName;
+            $imagePath = $uploadDirectory . $imageName;
+            move_uploaded_file($imageTmpName,$imagePath);
+    }
+  
+
+     $requete = "INSERT INTO publication(title, description, images) VALUES(:title,:description,:images)";
      $tab= [
          ":title"=>$title,
          ":description" =>$description,
@@ -28,7 +35,7 @@ $monapp=new App;
      $destination="./blog.php";
      $monapp->inserer($requete, $tab,$destination);
      
- }
+ }}
 if(isset($_POST['update']))
 {
   $title= $_POST['title'];
@@ -50,7 +57,7 @@ if(isset($_POST['update']))
                   $id_m=$_GET["id_modif"];
                  $data= $monapp->SelectionnerUn("Select * from publication where id=$id_m");
                 ?>
-          <form method="POST" action="create-admins.php?id=<?php echo $data->id;?>" enctype="multipart/form-data">
+          <form method="POST" action="create-blog.php?id=<?php echo $data->id;?>" enctype="multipart/form-data">
                 <!-- Email input -->
               
                 <div class="form-outline mb-4 mt-4">
@@ -68,7 +75,7 @@ if(isset($_POST['update']))
               </form>
                   <?php else:
                      ?>
-                     <form method="POST" action="create-admins.php" enctype="multipart/form-data">
+                     <form method="POST" action="create-blog.php" enctype="multipart/form-data">
                 <!-- Email input -->
                 <div class="form-outline mb-4 mt-4">
                   <input type="title" name="title" id="form2Example1" class="form-control" placeholder="titre" />
@@ -80,7 +87,7 @@ if(isset($_POST['update']))
                   <!-- <input type="text" name="username" id="form2Example1" class="form-control" placeholder="Nom admin" /> -->
                 </div>
                 <div class="form-outline mb-4">
-                  <input type="file" name="images" id="form2Example1" class="form-control" placeholder="images" multiple />
+                <input type="file" name="images[]" id="form2Example1" class="form-control" placeholder="images" multiple />
                 </div>
                 <!-- Submit button -->
                 <button type="submit" name="submit" class="btn btn-primary  mb-4 text-center">creer</button>

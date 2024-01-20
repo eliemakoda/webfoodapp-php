@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require '../../config/app.php';
 $app=   new App;
 $req = "SELECT * FROM reservation WHERE 1";

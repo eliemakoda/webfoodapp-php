@@ -1,11 +1,13 @@
 <?php
+session_start();
+
 require '../../config/app.php';
 $app=   new App;
-$requete = " 
-        SELECT categorie.nom as cnom, categorie.id as cid, menu.* FROM categorie
-        left join menu on categorie.id= menu.id_categorie
-        WHERE 1";
-$resultats = $app->SelectionnerTout($requete);
+$requete = "SELECT categorie.nom as cnom, categorie.id as cid, menu.* FROM menu
+            LEFT JOIN categorie ON menu.id_categorie=categorie.id 
+            WHERE 1";
+$menus = $app->SelectionnerTout($requete);
+
 if(isset($_GET['id_sup']))
 {
   $id=$_GET['id_sup'];
@@ -46,8 +48,8 @@ require '../header/header.php';
                     <th scope="row"><?php echo $i; ?></th>
                     <td><?php echo $menu->nom; ?></td>
                     <td><?php echo $menu->quantite; ?></td>
-                    <td><?php echo $admin->px; ?></td>
-                    <td><?php echo $admin->cnom; ?></td>
+                    <td><?php echo $menu->px; ?></td>
+                    <td><?php echo $menu->cnom; ?></td>
 
                     <td><a  type="submit" href="./menus.php?id_sup=<?php echo $menu->id; ?>" class="btn btn-danger">supprimer</a>
                     <a type="submit" href="./create-menu.php?id_modif=<?php echo $menu->id; ?>" class="btn btn-info">Modifier</a>

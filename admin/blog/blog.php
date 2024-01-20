@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require '../../config/app.php';
 $app=   new App;
 $req = "SELECT * FROM publication WHERE 1";
@@ -39,7 +41,7 @@ require '../header/header.php';
                   <tr>
                     <th scope="row"><?php echo $i; ?></th>
                     <td><?php echo $pub->title; ?></td>
-                    <td><?php echo $pub->date_add; ?></td>
+                    <td><?php echo $pub->date; ?></td>
                     <td><a  type="submit" href="./blog.php?id_sup=<?php echo $pub->id; ?>" class="btn btn-danger">supprimer</a>
                     <a type="submit" href="./create-blog.php?id_modif=<?php echo $pub->id; ?>" class="btn btn-info">Modifier</a>
                   </td>

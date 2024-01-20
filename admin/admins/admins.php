@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../../config/app.php';
 $app=   new App;
 $req = "SELECT * FROM admin WHERE 1";

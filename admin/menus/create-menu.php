@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require '../../config/app.php';
 require '../header/header.php';
 ?>
@@ -12,27 +14,30 @@ if (isset($_POST['submit'])) { // Récupérer les données du formulaire
   $desc2 = $_POST["desc2"];
   $category = $_POST["category"];
   $id_admin = $_SESSION['id_admin'] ? $_SESSION['id_admin'] : 1;
-  $prix= $_POST['prix'];
+  $prix = $_POST['prix'];
   // Récupérer les fichiers images
-  $images = $_FILES["images"];
+  // $images = $_FILES["images"];
 
   // Initialiser un tableau pour stocker les URL des images
   $urlsImages = [];
 
-  // Parcourir chaque image et les stocker dans le dossier "images"
-  foreach ($images["tmp_name"] as $key => $tmp_name) {
-    $nomImage = $images["name"][$key];
-    $cheminImage = "../../images/" . $nomImage;
-    move_uploaded_file($tmp_name, $cheminImage);
-    // Stocker l'URL de l'image dans le tableau
-    $urlsImages[] = $cheminImage;
+  $uploadDirectory ="../../images/";
+    
+  // Vérifier s'il y a des erreurs lors du téléchargement des images
+  if (!empty($_FILES["images"]["name"][0])) {
+      foreach ($_FILES["images"]["name"] as $key => $imageName) {
+          $imageTmpName = $_FILES["images"]["tmp_name"][$key];
+          $urlsImages[]=$imageName;
+          $imagePath = $uploadDirectory . $imageName;
+          move_uploaded_file($imageTmpName,$imagePath);
   }
+
 
   // Créer un tableau associatif pour toutes les valeurs de la requête
   $valeurs = [
     "nom" => $nom,
     "quantite" => $qte,
-    "px" => $prix, 
+    "px" => $prix,
     "description1" => $desc1,
     "description2" => $desc2,
     "images" => implode(",", $urlsImages), // Convertir le tableau en chaîne séparée par des virgules
@@ -40,8 +45,9 @@ if (isset($_POST['submit'])) { // Récupérer les données du formulaire
     "id_admin" => $id_admin
   ];
   $req = "INSERT INTO menu(nom, quantite, px, description1, description2, images, id_categorie, id_admin) VALUES(:nom, :quantite, :px, :description1, :description2, :images, :id_categorie, :id_admin)";
-  $destination="./menus.php";
+  $destination = "./menus.php";
   $monapp->inserer($req, $valeurs, $destination);
+}
 }
 if (isset($_POST['update'])) {
 
@@ -50,7 +56,7 @@ if (isset($_POST['update'])) {
   $desc1 = $_POST["desc1"];
   $desc2 = $_POST["desc2"];
   $category = $_POST["category"];
-  $prix= $_POST['prix'];
+  $prix = $_POST['prix'];
   $id = $_GET['id'];
 
   $reqMiseAJour = "
@@ -60,7 +66,7 @@ if (isset($_POST['update'])) {
   px = $prix, 
   description1 ='$desc1', 
   description2 = '$desc2', 
-  WHERE id = '$id'"; 
+  WHERE id = '$id'";
 
   // $req = "UPDATE `admin` SET `nom`='$nom',`email`='$email' WHERE id=$id";
   $monapp->maj($reqMiseAJour, "./menus.php");
@@ -78,46 +84,48 @@ if (isset($_POST['update'])) {
             $id_m = $_GET["id_modif"];
             $data = $monapp->SelectionnerUn("Select * from menu where id=$id_m");
           ?>
-             <form method="POST" action="create-menu.php" enctype="multipart/form-data">
-                <!-- Email input -->
-                <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="nom" id="form2Example1" class="form-control" placeholder="Nom" value=<?php echo $data->nom ?> />
+            <form method="POST" action="create-menu.php" enctype="multipart/form-data">
+              <!-- Email input -->
+              <div class="form-outline mb-4 mt-4">
+                <input type="text" name="nom" id="form2Example1" class="form-control" placeholder="Nom" value=<?php echo $data->nom ?> />
 
-                </div>
+              </div>
 
-                <div class="form-outline mb-4">
-                  <input type="number" name="qte" id="form2Example1" class="form-control" placeholder="Quantite" value=<?php echo $data->quantite ?> />
-                </div>
-                <div class="form-outline mb-4">
-                  <input type="number" name="prix" id="form2Example1" class="form-control" placeholder="Prix" value=<?php echo $data->px ?> />
-                </div>
-                <div class="form-outline mb-4 col-1">
-                  <label for="desc1">Description culturelle</label>
-                  <textarea name="desc1" class="form2Example1" rows="7" cols="67" placeholder="hi" value=<?php echo $data->description1 ?>>
+              <div class="form-outline mb-4">
+                <input type="number" name="qte" id="form2Example1" class="form-control" placeholder="Quantite" value=<?php echo $data->quantite ?> />
+              </div>
+              <div class="form-outline mb-4">
+                <input type="number" name="prix" id="form2Example1" class="form-control" placeholder="Prix" value=<?php echo $data->px ?> />
+              </div>
+              <div class="form-outline mb-4 col-1">
+                <label for="desc1">Description culturelle</label>
+                <textarea name="desc1" class="form2Example1" rows="7" cols="67" placeholder="hi" value=<?php echo $data->description1 ?>>
+                  <?php echo $data->description1 ?>
                   </textarea>
-                </div>
+              </div>
 
-                <div class="form-outline mb-4 flex col-1">
-                  <label for="desc2">Description commerciale</label>
-                  <textarea name="desc2" class="form2Example1" rows="7" cols="67" placeholder="hi" aria-placeholder="hi" value=<?php echo $data->description2 ?>>
+              <div class="form-outline mb-4 flex col-1">
+                <label for="desc2">Description commerciale</label>
+                <textarea name="desc2" class="form2Example1" rows="7" cols="67" placeholder="hi" aria-placeholder="hi" value=<?php echo $data->description2 ?>>
+                  <?php echo $data->description2 ?>
                   </textarea>
-                </div>
-                <div class="form-outline mb-4">
-                  <select name="category" id=""> categorie
-                    <?php
-                    foreach ($category as $cat) :
-                    ?>
-                      <option value=<?php echo $cat->id ?>> <?php echo $cat->nom ?> </option>
-                    <?php
-                    endforeach;
-                    ?>
-                  </select>
-                </div>
-                <!-- Submit button -->
-                <button type="submit" name="update" class="btn btn-primary  mb-4 text-center">Mettre à jours</button>
+              </div>
+              <div class="form-outline mb-4">
+                <select name="category" id=""> categorie
+                  <?php
+                  foreach ($category as $cat) :
+                  ?>
+                    <option value=<?php echo $cat->id ?>> <?php echo $cat->nom ?> </option>
+                  <?php
+                  endforeach;
+                  ?>
+                </select>
+              </div>
+              <!-- Submit button -->
+              <button type="submit" name="update" class="btn btn-primary  mb-4 text-center">Mettre à jours</button>
 
 
-              </form>
+            </form>
             <?php else :
             if (isset($category) && ($category != null)) :
             ?>
@@ -158,7 +166,7 @@ if (isset($_POST['update'])) {
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="file" name="images" id="form2Example1" class="form-control" placeholder="images" multiple />
+                  <input type="file" name="images[]" id="form2Example1" class="form-control" placeholder="images" multiple />
                 </div>
                 <!-- Submit button -->
                 <button type="submit" name="submit" class="btn btn-primary  mb-4 text-center">creer</button>

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require '../../config/app.php';
 require '../header/header.php';
 ?>
@@ -9,7 +11,7 @@ $monapp=new App;
  {
      $description= $_POST['description'];
      $nom= $_POST['nom'];
-     $requete = "INSERT INTO admin (nom,description) VALUES (:nom,:description)";
+     $requete = "INSERT INTO categorie (nom,description) VALUES (:nom,:description)";
      $tab= [
          ":nom"=>$nom,
          ":description" =>$description,

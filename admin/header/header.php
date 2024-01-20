@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav side-nav" >
           <li class="nav-item">
-            <a class="nav-link" style="margin-left: 20px;" href="../index.php">Accueil
+            <a class="nav-link" style="margin-left: 20px;" href="../admins/login-admins.php">Accueil
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -52,13 +52,15 @@
         </ul>
         <ul class="navbar-nav ml-md-auto d-md-flex">
           <li class="nav-item">
-            <a class="nav-link" href="../index.php">Home
+            <a class="nav-link" href="#">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              username
+              <?php
+              echo  $_SESSION['nom_admin'];
+              ?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Logout</a>
