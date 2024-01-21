@@ -1,11 +1,27 @@
 <?php
+require "./config/app.php";
+if(isset($_POST['submitf']))
+{
+	$nom=$_POST['name'];
+	$email=$_POST['email'];
+	$msg=$_POST['comment'];
+	$sql= "INSERT INTO contact(fullname, email, message) VALUES(:fullname,:email,:message)";
+	$tab=[
+		":fullname"=>$nom,
+		":email"=>$email,
+		":message"=>$msg
+	];
+	$dest="./index.php";#page de redirection après envoi du formulaire
+	$apps= new App;
+	$apps->inserer($sql,$tab,$dest);
+}
 require './config/header.php';
 ?>
 		<div class="inner-banner title-area text-center image-7">
 			<div class="container title-area-content">
-				<h1 class="animated" data-animation="fadeInUp" data-animation-delay="200">Contact Us</h1>
+				<!-- <h1 class="animated" data-animation="fadeInUp" data-animation-delay="200">Contact Us</h1>
 				<h2 class="animated" data-animation="fadeInDown" data-animation-delay="200">All about delicieux</h2>
-				<div class="line animated" data-animation="fadeInDown" data-animation-delay="400"></div>
+				<div class="line animated" data-animation="fadeInDown" data-animation-delay="400"></div> -->
                 <div class="bread-crumb"><a href="#">Home</a> <span>Contact</span></div>
 			</div>
 		</div>
@@ -37,7 +53,7 @@ require './config/header.php';
 							<div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
 							<div class="caption">Email Address</div>
 							<div class="line"></div>
-							<div class="description"><a href="mailto:reservation@delicieux.com">reservation@delicieux.com</a><br><a href="mailto:support@delicieux.com">support@delicieux.com</a><br><a href="mailto:sales@delicieux.com">sales@delicieux.com</a></div>
+							<!-- <div class="description"><a href="mailto:reservation@delicieux.com">reservation@delicieux.com</a><br><a href="mailto:support@delicieux.com">support@delicieux.com</a><br><a href="mailto:sales@delicieux.com">sales@delicieux.com</a></div> -->
 						</div>
 					</div>
 				</div>
@@ -63,20 +79,18 @@ require './config/header.php';
 							</div>
 						</div>
 					</div>
-						<form action='https://miraclestudio.design/html/delicieux/process.php' method='post' name='ContactForm' id='ContactForm' >
+						<form action='./contact-us.php' method='POST' name='ContactForm' >
 							<div class="row">
 								<div class="col-lg-6 col-lg-offset-3 center">
 									<div class="form-group">
-										<input type="text" class="form-control" name="name" placeholder="Full Name *">
+										<input type="text" class="form-control" name="name" placeholder="Nom *">
 									</div>
 									<div class="form-group">
 										<input type="email" class="form-control" name="email" placeholder="Email *">
 									</div>
+									
 									<div class="form-group">
-										<input type="text" class="form-control" name="website" placeholder="Website">
-									</div>
-									<div class="form-group">
-										<textarea rows="5" class="form-control" name="comment" placeholder="Your Message *"></textarea>
+										<textarea rows="5" class="form-control" name="comment" placeholder="votre message *"></textarea>
 									</div>
 									<div id='message_post'></div>
 										<input class="btn btn-default" type='submit' value='SUBMIT' name='submitf' id="submitf">

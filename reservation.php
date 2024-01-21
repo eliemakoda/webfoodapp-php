@@ -1,5 +1,37 @@
 <?php
+require './config/app.php';
+if(isset($_POST['submit']))
+{
+	$nom=$_POST['fullname'];
+	$email=$_POST['uremail'];
+	$date=$_POST['date1'];
+	$heure=$_POST['time'];
+	$nb_pers=$_POST['numberofpersons'];
+	$tel=$_POST['phonenumber'];
+	$branchname=$_POST['branchname'];
+	$message=$_POST['urmessage'];
+	$statut=0;
+	$req="
+		INSERT INTO reservation(name, email, date_livraison, heure_livraison, nb_personne, phone, branch, message, statut) 
+		VALUES(:name, :email, :date_livraison, :heure_livraison, :nb_personne, :phone, :branch,:message, :statut)
+		";
+	$tab=[
+		":name"=>$nom,
+		":email"=>$email,
+		":date_livraison"=>$date, 
+		":heure_livraison"=>$heure, 
+		":nb_personne"=>$nb_pers,
+		":phone"=>$tel,
+		":branch"=>$branchname,
+		":message"=>$message,
+		":statut"=>$statut
+	];
+	$dest="./index.php";
+	$apk= new App;
+	$apk->inserer($req,$tab,$dest);
+}
 require './config/header.php';
+
 ?>
 		<div class="inner-banner title-area text-center image-5">
 			<div class="container title-area-content">
@@ -49,11 +81,11 @@ require './config/header.php';
 								<div class="row">
 									<div class="col-lg-8 col-lg-offset-2">
 										<div class="row form animated" data-animation="fadeInUp" data-animation-delay="400">
-											<form action='https://miraclestudio.design/html/delicieux/reservation.php' method='post' name='ReservationForm' id='ReservationForm'>
+											<form  method='POST' action="./reservation.php" id=''>
 												<div class="col-lg-12">
 													<div class="herotext">
 														<p class="cross-line">
-															<span>Book Online</span>
+															<span>Commande En ligne</span>
 														</p>
 													</div>
 												</div>
@@ -74,7 +106,7 @@ require './config/header.php';
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4">
 													<div class="form-group">
-														<input type="text" class="form-control" name="time" placeholder="Time *">
+														<input type="time" class="form-control" name="time" placeholder="Time *">
 													</div>
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4">
@@ -89,7 +121,7 @@ require './config/header.php';
 												</div>
 												<div class="col-lg-6 col-md-6 col-sm-6">
 													<div class="form-group">
-														<input type="text" class="form-control" name="branchname" placeholder="Branch Name *">
+														<input type="text" class="form-control" name="branchname" placeholder="indiquez votre rue *">
 													</div>
 												</div>
 												<div class="col-lg-12">
@@ -101,8 +133,9 @@ require './config/header.php';
 													<div id='r_message_post'></div>
 												</div>
 												<div class="col-lg-12">
-													<input class="btn btn-default" type='submit' value='SUBMIT' name='r_submitf' id="r_submitf">
+													<input class="btn btn-default" type='submit' value='envoyer' name='submit' id="">
 												</div>
+			<input type="submit" name="submit" id="a" value="ded">
 											</form>
 										</div>
 									</div>

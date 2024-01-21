@@ -90,8 +90,9 @@ class App{
         }
     }
     public function se_connecter_client($requete, $tableau_donnee,$destination){
+        $tab=["email"=>$tableau_donnee['email']];
         $connection_user=  $this->lien_connexion->prepare($requete);
-        $connection_user->execute($tableau_donnee);
+        $connection_user->execute($tab);
         $resultat= $connection_user->fetch(PDO::FETCH_ASSOC);
         if($connection_user->rowCount()>0)
         {

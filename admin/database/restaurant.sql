@@ -156,9 +156,7 @@ CREATE TABLE `reservation` (
   `phone` varchar(20) DEFAULT NULL,
   `branch` varchar(100) DEFAULT NULL,
   `message` text DEFAULT NULL,
-  `statut` int(11) DEFAULT NULL,
-  `livré` tinyint(1) DEFAULT NULL,
-  `id_menu` int(11) DEFAULT NULL
+  `statut` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -257,8 +255,7 @@ ALTER TABLE `publication`
 -- Index pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_reservation_menu` (`id_menu`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `team`
@@ -388,9 +385,6 @@ ALTER TABLE `menureview`
 --
 -- Contraintes pour la table `reservation`
 --
-ALTER TABLE `reservation`
-  ADD CONSTRAINT `fk_reservation_menu` FOREIGN KEY (`id_menu`) REFERENCES `menu` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`id_menu`) REFERENCES `menu` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

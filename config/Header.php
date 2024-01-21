@@ -20,7 +20,7 @@
 		<div id="preloader">
 			<div id="status">
 				<a href="./admin/">
-				<div class="logo"><img src="images/logos/logo-nav.png" alt=""></div></a>
+				<div class="logo"><img src="./images/logos/logo.jpg" alt=""  height="250" width="150" class="rounded-circle"></div></a>
 				<div class="sk-cube-grid">
 					<div class="sk-cube sk-cube1"></div>
 					<div class="sk-cube sk-cube2"></div>
@@ -45,13 +45,13 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand visible-sm visible-xs light-logo" href="./admin/"><img src="images/logos/logo-nav.png" alt=""></a>
-					<a class="navbar-brand visible-sm visible-xs dark-logo" href="./admin/"><img src="images/logos/logo-nav-dark.png" alt=""></a>
+					<a class="navbar-brand visible-sm visible-xs light-logo" href=""><img src="./images/logos/logo.jpg"  alt=""  height="150" width="250" class="rounded-circle"></a>
+					<a class="navbar-brand visible-sm visible-xs dark-logo" href=""><img src="./images/logos/logo.jpg"  alt=""  height="150" width="250" class="rounded-circle"></a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbar">
 					<ul class="nav navbar-nav" data-hover="dropdown" data-animations="fadeIn fadeIn fadeInUp fadeInLeft">
-							<li class="pull-left"><a class="navbar-brand hidden-sm hidden-xs light-logo" href="./admin/"><img src="images/logos/logo-nav.png" alt=""></a> <a class="navbar-brand hidden-sm hidden-xs dark-logo" href="#"><img src="images/logos/logo-nav-dark.png" alt=""></a></li>
+							<li class="pull-left"><a class="navbar-brand hidden-sm hidden-xs light-logo" href=""><img src="./images/logos/logo.jpg"  alt="" class="rounded-circle" height="100" width="100"></a> <a class="navbar-brand hidden-sm hidden-xs dark-logo" href="#"><img src="images/logos/logo-nav-dark.png" alt=""></a></li>
 						<li class="dropdown shop_cart pull-right">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>8</span></a>
 							<ul class="dropdown-menu">
@@ -61,7 +61,7 @@
 											<h4>Shopping Cart</h4>
 											<div class="cart_items">
 												<div class="item clearfix">
-													<a href="#"><img src="images/shop/menu/1.jpg" alt=""></a>
+													<a href=""><img src="images/shop/menu/1.jpg" alt=""></a>
 													<div class="item_desc">
 														<div class="row1 clearfix">
 															<a href="#">Food Name</a>
@@ -84,10 +84,10 @@
 												</div>
 												<!-- End item -->
 												<div class="item clearfix">
-													<a href="#"><img src="images/shop/menu/2.jpg" alt=""></a>
+													<a href=""><img src="images/shop/menu/2.jpg" alt=""></a>
 													<div class="item_desc">
 														<div class="row1 clearfix">
-															<a href="#">Food Name</a>
+															<a href="">Food Name</a>
 															<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
 														</div>
 														<div class="row2 clearfix">
