@@ -1,6 +1,12 @@
 
 <?php
 session_start();
+// require "./config/app.php";
+$apps = new App;
+$sqlm="SELECT * FROM menu WHERE 1 LIMIT 3";
+$menus=$apps->SelectionnerTout($sqlm);
+$sql_nb="SELECT count(*) as nb_art from cart where 1";
+$nb=$apps->SelectionnerUn($sql_nb);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,18 +67,22 @@ session_start();
 		?>
 							<li class="pull-left"><a class="navbar-brand hidden-sm hidden-xs light-logo" href=""><img src="./images/logos/logo.jpg"  alt="" class="rounded-circle" height="100" width="100"></a> <a class="navbar-brand hidden-sm hidden-xs dark-logo" href="#"><img src="images/logos/logo-nav-dark.png" alt=""></a></li>
 						<li class="dropdown shop_cart pull-right">
-							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>8</span></a>
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span><?php echo $nb->nb_art ?></span></a>
 							<ul class="dropdown-menu">
 								<li>
 									<div class="yamm-content">
 										<div class="shop_cart_content">
-											<h4>Shopping Cart</h4>
+											<h4>Votre Panier</h4>
 											<div class="cart_items">
+												<?php if(isset($menus)&&($menus!=null)):
+													foreach($menus as $men):
+														$img= explode(',',$men->images);
+													?>
 												<div class="item clearfix">
-													<a href=""><img src="images/shop/menu/1.jpg" alt=""></a>
+													<a href=""><img src="images/<?php $img[0] ?>" alt=""></a>
 													<div class="item_desc">
 														<div class="row1 clearfix">
-															<a href="#">Food Name</a>
+															<a href="#"><?php $men->nom;?></a>
 															<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
 														</div>
 														<div class="row2 clearfix">
@@ -85,42 +95,19 @@ session_start();
 																	<li><i class="fa fa-star-o"></i></li>
 																</ol>
 															</div>
-															<span class="item_quantity">x 2</span>													
-															<span class="item_price">$12.89</span> 
+															<span class="item_quantity">x 1</span>													
+															<span class="item_price"><?php $men->px;?> FCFA</span> 
 														</div>
 													</div>
 												</div>
-												<!-- End item -->
-												<div class="item clearfix">
-													<a href=""><img src="images/shop/menu/2.jpg" alt=""></a>
-													<div class="item_desc">
-														<div class="row1 clearfix">
-															<a href="">Food Name</a>
-															<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
-														</div>
-														<div class="row2 clearfix">
-															<div class="star">
-																<ol>
-																	<li><i class="fa fa-star"></i></li>
-																	<li><i class="fa fa-star"></i></li>
-																	<li><i class="fa fa-star"></i></li>
-																	<li><i class="fa fa-star-o"></i></li>
-																	<li><i class="fa fa-star-o"></i></li>
-																</ol>
-															</div>
-															<span class="item_quantity">x 2</span>													
-															<span class="item_price">$12.89</span> 
-														</div>
-													</div>
-												</div>
-												<!-- End item -->
-												<div class="total-price clearfix"> 
-													<span class="caption">Total</span>
-													<span class="shop_checkout_price">$150.99</span>
-												</div>
+												<?php
+												endforeach;
+											endif;
+												?>
+											
 												<div class="shop_action clearfix"> 
-												<a href="reservation.php" class="transparent-grey"> <button class="btn btn-dark pull-left">Check out</button></a>
-												<a href="shop-cart.php" class="transparent-grey"> <button class="btn2 btn-dark pull-right">View Cart</button></a>
+												<!-- <a href="reservation.php" class="transparent-grey"> <button class="btn btn-dark pull-left">Check out</button></a> -->
+												<a href="shop-cart.php" class="transparent-grey"> <button class="btn2 btn-dark pull-right">Voir le Panier</button></a>
 												</div>
 											</div>
 											<!-- End cart items -->
@@ -130,8 +117,8 @@ session_start();
 								</li>
 							</ul>
 						</li>
-						<li class="reservation pull-right hidden-xs hidden-sm hidden-md"><a href="reservation.php" class="transparent-grey">Book Now</a></li>
-						<li class="social-header pull-right hidden-xs hidden-sm hidden-md"><a href="#" class="transparent-grey"><i class="fa fa-facebook"></i></a> <a href="#" class="transparent-grey"><i class="fa fa-twitter"></i></a> <a href="#" class="transparent-grey"><i class="fa fa-instagram"></i></a> <a href="#" class="transparent-grey"><i class="fa fa-tripadvisor"></i></a></li>
+						<li class="reservation pull-right hidden-xs hidden-sm hidden-md"><a href="reservation.php" class="transparent-grey">Reserver Maintenant</a></li>
+						<!-- <li class="social-header pull-right hidden-xs hidden-sm hidden-md"><a href="#" class="transparent-grey"><i class="fa fa-facebook"></i></a> <a href="#" class="transparent-grey"><i class="fa fa-twitter"></i></a> <a href="#" class="transparent-grey"><i class="fa fa-instagram"></i></a> <a href="#" class="transparent-grey"><i class="fa fa-tripadvisor"></i></a></li> -->
 						<li class="dropdown">
 							<a href="index.php" class=" nav-menu" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false">HOME</a>
 						
