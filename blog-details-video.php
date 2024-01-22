@@ -227,7 +227,7 @@ require './config/header.php';
 			<div class="col-lg-4 col-md-4 col-sm-4 blog-post animated" data-animation="fadeInUp" data-animation-delay="400">
 				<div class="picture"><img src="images/<?php echo $im[0] ?>" class="img-responsive center-block" alt=""></div>
 				<div class="blog-contents">
-					<h1 class="post-title"><a href="#"><?php echo $pub->title;?></a></h1>
+					<h1 class="post-title"><a href="./blog-details-video.php?id=<?php echo $pub->id;?>"><?php echo $pub->title;?></a></h1>
 					<div class="post-metas"><?php echo $pub->date;?> <a class="" href="./blog-details-video.php?id=<?php echo $pub->id;?>"></a></div>
 					<div class="line"></div>
 				</div>
