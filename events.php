@@ -1,4 +1,5 @@
 <?php
+session_start();
 require './header.php';
 ?>
 		<div class="inner-banner title-area text-center image-8">

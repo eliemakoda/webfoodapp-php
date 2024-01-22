@@ -1,5 +1,6 @@
 <?php
 require "./config/app.php";
+session_start();
 $apps=new App;
 if(isset($_POST['submitf']))
 {

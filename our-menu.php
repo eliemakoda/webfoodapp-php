@@ -1,5 +1,6 @@
 <?php
 require './config/app.php';
+session_start();
 $req="SELECT * FROM categorie WHERE 1;";
 $apps= new App;
 $categorie= $apps->SelectionnerTout($req);
@@ -40,14 +41,12 @@ require './config/header.php';
 					if(isset($menus)&& ($menus!=null)):
 						foreach($menus as $men):
 							$img= explode(',',$men->images);
-							foreach($img as $im):
 						?>
 						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 picture animated" data-animation="fadeInUp" data-animation-delay="400">
-							<img src="images/<?php echo $im; ?>" class="img-responsive center-block" alt=<?php echo $im;?> >					
+							<img src="images/<?php echo $img[0]; ?>" class="img-responsive center-block" alt=<?php echo $img[0];?> >					
 						</div>
 						<?php
 						endforeach;
-					endforeach;
 				endif;
 						?>
 					

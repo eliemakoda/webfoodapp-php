@@ -1,5 +1,6 @@
 <?php
 require "./config/app.php";
+session_start();
 $req="SELECT * FROM publication WHERE 1";
 $apps= new App;
 $posts= $apps->SelectionnerTout($req);
@@ -44,7 +45,7 @@ require './config/header.php';
 								echo implode(' ', $first20Words); // Affiche les mots séparés par un espace
 							?>
 							</div>
-								<div class="button"><a class="fill-orange" href="blog-details-video.php?id=<?php echo $post->id;?>">Read more</a></div>
+								<div class="button"><a class="fill-orange" href="blog-details-video.php?id=<?php echo $post->id;?>">Voir plus...</a></div>
 							</div>
 						</div>
 					</div>

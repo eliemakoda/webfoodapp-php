@@ -1,5 +1,6 @@
 <?php
 require './config/app.php';
+session_start();
 if(isset($_POST['submit']))
 {
 	$nom=$_POST['fullname'];

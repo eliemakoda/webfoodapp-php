@@ -1,6 +1,6 @@
 <?php
-require './config/header.php';
 require "./config/app.php";
+session_start();
 $apps = new App;
 if(isset($_GET['id_menu']))
 {
@@ -15,7 +15,7 @@ if(isset($_GET['id_menu']))
 	$apps->inserer($sql,$tab,$dest);
 }
 $id_user= $_SESSION['id_client'];
-$sql="SELECT *, cart.id as cid from cart left join menu on cart.id_menu=menu.id WHERE cart.id_user=$id_user GROUP BY cart.id_menu;;";
+$sql="SELECT *, cart.id as cid from cart left join menu on cart.id_menu=menu.id WHERE cart.id_user=$id_user GROUP BY cart.id_menu;";
 $pannier= $apps->SelectionnerTout($sql);
 $sqlm="SELECT * FROM menu WHERE 1 LIMIT 3";
 $menus=$apps->SelectionnerTout($sqlm);
@@ -28,13 +28,15 @@ if(isset($_GET['id_sup']))
 	$dest="./shop-cart.php";
 	$apps->supprimer($sql,$dest);
 }
+require './config/header.php';
+
 ?>
 		<div class="inner-banner title-area text-center image-10">
 			<div class="container title-area-content">
-				<h1 class="animated" data-animation="fadeInUp" data-animation-delay="200">Pannier</h1>
+				<h1 class="animated" data-animation="fadeInUp" data-animation-delay="200">Panier</h1>
 				<h2 class="animated" data-animation="fadeInDown" data-animation-delay="200">VOS COMMANDES</h2>
 				<div class="line animated" data-animation="fadeInDown" data-animation-delay="400"></div>
-                <div class="bread-crumb"><a href="#">Accueil</a> <span>PAnnier</span></div>
+                <div class="bread-crumb"><a href="#">Accueil</a> <span>PAnier</span></div>
 			</div>
 		</div>
 		<!-- /. INNER BANNER STARTS
@@ -104,7 +106,7 @@ if(isset($_GET['id_sup']))
 											</div>
 											<div class="col-xs-6 col-sm-3 col-md-2 col-lg-2">
 												<div class="product-qty">
-													<input name="quantity"  type="number" value="1" size="4" maxlength="12">
+													<input name="text"  type="number" value="1" size="4" maxlength="12">
 												</div>
 											</div>
 											<div class="visible-xs-block clearfix"></div>

@@ -1,7 +1,8 @@
 <?php
 require './config/app.php';
+session_start();
 $apps = new App;
-$id = isset($_GET['id']) ? $_GET['id'] : 1;
+$id = $_GET['id'];
 $req = "SELECT * from publication where id =$id";
 $result = $apps->SelectionnerUn($req);
 $reqRep = "SELECT * from replique left join user on replique.id_utilisateur=user.id where replique.id_post=$id";
@@ -11,7 +12,7 @@ $pubs=$apps->SelectionnerTout($reqpubs);
 if (isset($_POST['submit'])) {
 	$comment = $_POST['comment'];
 	$id_user = $_SESSION['id_client'];
-	$idpost = $_GET['id'];
+	$idpost = $_POST['id'];
 	$sql = "INSERT INTO replique( id_utilisateur, message, id_post) VALUES(:id_utilisateur,:message,:id_post)";
 
 	$tab = [
@@ -20,15 +21,16 @@ if (isset($_POST['submit'])) {
 		":id_post" => $idpost
 	];
 	$dest = "./blog.php";
-	$apps->inserer($req, $tab, $dest);
+	$apps->inserer($sql, $tab, $dest);
 }
 require './config/header.php';
+
 ?>
 <div class="inner-banner title-area text-center image-6">
 	<div class="container title-area-content">
-		<h1 class="animated" data-animation="fadeInUp" data-animation-delay="200">Blog</h1>
-		<h2 class="animated" data-animation="fadeInDown" data-animation-delay="200">ALL LASTEST NEWS ABOUT OUR RESTARANT</h2>
-		<div class="line animated" data-animation="fadeInDown" data-animation-delay="400"></div>
+		<h1 class="animated" data-animation="fadeInUp" data-animation-delay="50">Blog</h1>
+		<h2 class="animated" data-animation="fadeInDown" data-animation-delay="50">ALL LASTEST NEWS ABOUT OUR RESTARANT</h2>
+		<div class="line animated" data-animation="fadeInDown" data-animation-delay="50"></div>
 		<div class="bread-crumb"><a href="#">Home</a> <a href="#">Blog</a> <span>Blog Details</span></div>
 	</div>
 </div>
@@ -133,7 +135,7 @@ require './config/header.php';
 												?>
 
 														<div class="media-body">
-															<h4 class="media-heading"><?php echo $rep->nom; ?></h4>
+															<h4 class="media-heading"><?php echo $rep->name; ?></h4>
 															<div class="time"><i class="fa fa-calendar" aria-hidden="true"></i></div>
 															<p><?php
 																echo $rep->message;
@@ -174,16 +176,17 @@ require './config/header.php';
 										<div class="col-lg-4 col-md-4 col-sm-4">
 
 										</div>
-										<form action="./blog-details-video.php" method="POST"></form>
+										<form method="POST" action="./blog-details-video.php?id=<?php echo $_GET['id'];?>" >
 										<div class="col-lg-12">
 											<div class="form-group">
 												<textarea class="form-control" rows="5" placeholder="Comment *" name="comment"></textarea>
 											</div>
+											<input type="text" name="id" id="" hidden value="<?php echo $_GET['id'];?>">
 										</div>
+											<input type="submit" value="commenter" name="submit"  class="btn btn-default">
+											<!-- <button type="submit" class="btn btn-default" >Submit</button> -->
 										</form>
-										<div class="col-lg-12">
-											<button type="submit" class="btn btn-default">Submit</button>
-										</div>
+
 									</div>
 								</div>
 							</div>
@@ -225,7 +228,7 @@ require './config/header.php';
 				<div class="picture"><img src="images/<?php echo $im[0] ?>" class="img-responsive center-block" alt=""></div>
 				<div class="blog-contents">
 					<h1 class="post-title"><a href="#"><?php echo $pub->title;?></a></h1>
-					<div class="post-metas"><?php echo $pub->date;?> <a class="" href="#"></a></div>
+					<div class="post-metas"><?php echo $pub->date;?> <a class="" href="./blog-details-video.php?id=<?php echo $pub->id;?>"></a></div>
 					<div class="line"></div>
 				</div>
 			</div>

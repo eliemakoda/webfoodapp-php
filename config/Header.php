@@ -1,10 +1,13 @@
 
 <?php
-session_start();
 // require "./config/app.php";
 $apps = new App;
-$sqlm="SELECT * FROM menu WHERE 1 LIMIT 3";
-$menus=$apps->SelectionnerTout($sqlm);
+if(isset($_SESSION['id_client'])){
+	$id=$_SESSION['id_client'];
+	$sqlm="SELECT * from cart left join menu on cart.id_menu= menu.id left join user on cart.id_user=user.id where user.id=$id LIMIT 3;";
+	$menuss=$apps->SelectionnerTout($sqlm);
+}
+
 $sql_nb="SELECT count(*) as nb_art from cart where 1";
 $nb=$apps->SelectionnerUn($sql_nb);
 ?>
@@ -18,7 +21,7 @@ $nb=$apps->SelectionnerUn($sql_nb);
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>FoodAPP</title>
 		<link href="css/all-stylesheets.css" rel="stylesheet">
-
+		<link rel="icon" href="./images/logos/logo.jpg">
 	</head>
 	<body>
 	
@@ -74,15 +77,15 @@ $nb=$apps->SelectionnerUn($sql_nb);
 										<div class="shop_cart_content">
 											<h4>Votre Panier</h4>
 											<div class="cart_items">
-												<?php if(isset($menus)&&($menus!=null)):
-													foreach($menus as $men):
+												<?php if(isset($menuss)&&($menuss!=null)):
+													foreach($menuss as $men):
 														$img= explode(',',$men->images);
 													?>
 												<div class="item clearfix">
-													<a href=""><img src="images/<?php $img[0] ?>" alt=""></a>
+													<a href=""><img src="images/<?php echo $img[0] ?>" alt="" class="rounded"></a>
 													<div class="item_desc">
 														<div class="row1 clearfix">
-															<a href="#"><?php $men->nom;?></a>
+															<a href="#"><?php echo $men->nom;?></a>
 															<div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
 														</div>
 														<div class="row2 clearfix">
@@ -96,7 +99,7 @@ $nb=$apps->SelectionnerUn($sql_nb);
 																</ol>
 															</div>
 															<span class="item_quantity">x 1</span>													
-															<span class="item_price"><?php $men->px;?> FCFA</span> 
+															<span class="item_price"><?php echo $men->px;?> FCFA</span> 
 														</div>
 													</div>
 												</div>

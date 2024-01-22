@@ -1,9 +1,10 @@
 <?php
 require './config/app.php';
+session_start();
 $apps= new App;
-$id_menu=$_GET['id_menu']?$_GET['id_menu']:1;
-$sql= "SELECT * FROM menu WHERE id=$id_menu;";
-$menus=$apps->SelectionnerUn($sql);
+$id_menu=$_GET['id_menu'];
+$sql= "SELECT * FROM menu WHERE id=$id_menu";
+$menu=$apps->SelectionnerTout($sql);
 $repmen="SELECT * FROM  menureview WHERE id_menu=$id_menu";
 $reps= $apps->SelectionnerTout($repmen);
 $sqlmen="SELECT * FROM menu WHERE 1 LIMIT 1;";
@@ -11,12 +12,13 @@ $mens=$apps->SelectionnerTout($sqlmen);
 if(isset($_POST['submit']))
 {
 	$comment= $_POST['commentaire'];
+	$id_menu=$_POST['id'];
 	$sql="INSERT INTO menureview(revmessage, id_menu) VALUES(:revmessage,:id_menu)";
 	$tab=[
 		":revmessage"=>$comment,
 		":id_menu"=>$id_menu
 	];
-	$dest="./menu-details.php";
+	$dest="./our-menu.php";
 	$apps->inserer($sql,$tab,$dest);
 }
 require './config/header.php';
@@ -37,8 +39,9 @@ require './config/header.php';
 			<div class="container menu-details">
 				<div class="row">
 					<?php
-					if(isset($menus)&&($menus!=null)):
-					?>
+					if(isset($menu)&&($menu!=null)):
+						foreach($menu as $menus)
+?>
 					<!-- Flex Slider Starts -->
 					<div class="col-lg-6 col-md-6 pics-gallery" data-animation="fadeInUp" data-animation-delay="200">
 						<div id="slider" class="flexslider">
@@ -188,12 +191,13 @@ require './config/header.php';
 											<div class="row">
 												
 												<div class="col-lg-12">
-													<div class="form-group"><form action="./menu-details.php" method="POST">
+													<div class="form-group"><form action="./menu-details.php?id_menu=<?php echo $menus->id?>" method="POST">
 														<textarea class="form-control" rows="5" name="commentaire" placeholder="Commentaire *"></textarea>
 													</div>
 												</div>
 												<div class="col-lg-12">
-													<button type="submit" class="btn btn-default">Submit</button>
+													<input type="text" name="id" value="<?php echo $_GET['id_menu'];?>" hidden>
+													<button type="submit" class="btn btn-default" name="submit">Submit</button>
 												</div></form>
 											</div>
 										</div>

@@ -1,5 +1,6 @@
 <?php 
 require "./config/app.php";
+session_start();
 require './config/Header.php';
 ?>
 		<div class="inner-banner title-area text-center image-4">

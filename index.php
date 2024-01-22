@@ -1,5 +1,6 @@
 <?php 
 require './config/app.php';
+session_start();
 $req="SELECT * FROM categorie WHERE 1;";
 $apps= new App;
 $categorie= $apps->SelectionnerTout($req);
@@ -415,7 +416,7 @@ require './config/Header.php';
                     ?>
                             <!-- Menu Item Starts -->
                             <div class="menu-item">
-                                <h1><a href="menu-details.php?id_menu=<?php echo $men->id; ?>"><?php echo $men->nom; ?></a><span class="price pull-right"><?php echo $men->px; ?> FCFA<a href="#aeza"><i class="fa fa-shopping-cart"></i></a></span></h1>
+                                <h1><a href="menu-details.php?id_menu=<?php echo $men->id; ?>"><?php echo $men->nom; ?></a><span class="price pull-right"><?php echo $men->px; ?> FCFA<a href="./shop-cart.php?id_menu=<?php echo $men->id; ?>"><i class="fa fa-shopping-cart"></i></a></span></h1>
                                 <div class="description"><?php echo $men->description1; ?> </div>
                             </div>
                     <?php
@@ -519,7 +520,6 @@ require './config/Header.php';
 								</p>
 								<div class="description animated" data-animation="fadeInUp" data-animation-delay="600">One morning, when Gregor Samsa woke from troubled dreams, he found himself<br>transformed in his bed into a horrible vermin. </div>
 							</div>
-							Image de <a href="https://fr.freepik.com/photos-gratuite/portrait-homme-souriant_11379781.htm#query=jeune%20homme%20noir%20souriant&position=2&from_view=keyword&track=ais&uuid=da66e2cf-043a-485b-8b07-8e6270f9ceee">Freepik de aaron</a>
 						</div>
 					</div>
 					<div class="row">

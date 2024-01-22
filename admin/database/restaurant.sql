@@ -184,6 +184,13 @@ CREATE TABLE `user` (
   `password` varchar(100) DEFAULT NULL,
   `added_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE replique (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_utilisateur INT,
+    message TEXT,
+    id_post INT,
+    FOREIGN KEY (id_post) REFERENCES publication(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Index pour les tables déchargées
