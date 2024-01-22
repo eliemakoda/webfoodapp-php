@@ -1,4 +1,24 @@
 <?php
+require './config/app.php';
+$apps= new App;
+$id_menu=$_GET['id_menu']?$_GET['id_menu']:1;
+$sql= "SELECT * FROM menu WHERE id=$id_menu;";
+$menus=$apps->SelectionnerUn($sql);
+$repmen="SELECT * FROM  menureview WHERE id_menu=$id_menu";
+$reps= $apps->SelectionnerTout($repmen);
+$sqlmen="SELECT * FROM menu WHERE 1 LIMIT 1;";
+$mens=$apps->SelectionnerTout($sqlmen);
+if(isset($_POST['submit']))
+{
+	$comment= $_POST['commentaire'];
+	$sql="INSERT INTO menureview(revmessage, id_menu) VALUES(:revmessage,:id_menu)";
+	$tab=[
+		":revmessage"=>$comment,
+		":id_menu"=>$id_menu
+	];
+	$dest="./menu-details.php";
+	$apps->inserer($sql,$tab,$dest);
+}
 require './config/header.php';
 ?>
 		<div class="inner-banner title-area text-center image-5">
@@ -16,13 +36,20 @@ require './config/header.php';
 				========================================================================= -->  
 			<div class="container menu-details">
 				<div class="row">
+					<?php
+					if(isset($menus)&&($menus!=null)):
+					?>
 					<!-- Flex Slider Starts -->
 					<div class="col-lg-6 col-md-6 pics-gallery" data-animation="fadeInUp" data-animation-delay="200">
 						<div id="slider" class="flexslider">
 							<ul class="slides">
+								<?php
+									$img= explode(',',$menus->images);
+									foreach($img as $im):
+								?>
 								<li>
-									<img src="images/menu-details/big/1.jpg" alt="" >
-									<a class="image-popup-vertical-fit" href="images/menu-details/big/1.jpg" title="Lorem ipsum dolor sit amet">
+									<img src="images/<?php echo $im;?>" alt="" >
+									<a class="image-popup-vertical-fit" href="images/<?php echo $im;?>" title="Lorem ipsum dolor sit amet">
 										<!-- Picture Overlay Starts -->
 										<div class="picture-overlay">
 											<div class="icons">
@@ -32,88 +59,24 @@ require './config/header.php';
 										<!-- Picture Overlay Ends -->
 									</a>
 								</li>
-								<li>
-									<img src="images/menu-details/big/2.jpg" alt="" >
-									<a class="image-popup-vertical-fit" href="images/menu-details/big/2.jpg" title="Lorem ipsum dolor sit amet">
-										<!-- Picture Overlay Starts -->
-										<div class="picture-overlay">
-											<div class="icons">
-												<div><span class="icon"><i class="fa fa-search"></i></span></div>
-											</div>
-										</div>
-										<!-- Picture Overlay Ends -->
-									</a>
-								</li>
-								<li>
-									<img src="images/menu-details/big/3.jpg" alt="">
-									<a class="image-popup-vertical-fit" href="images/menu-details/big/3.jpg" title="Lorem ipsum dolor sit amet">
-										<!-- Picture Overlay Starts -->
-										<div class="picture-overlay">
-											<div class="icons">
-												<div><span class="icon"><i class="fa fa-search"></i></span></div>
-											</div>
-										</div>
-										<!-- Picture Overlay Ends -->
-									</a>
-								</li>
-								<li>
-									<img src="images/menu-details/big/4.jpg" alt="">
-									<a class="image-popup-vertical-fit" href="images/menu-details/big/4.jpg" title="Lorem ipsum dolor sit amet">
-										<!-- Picture Overlay Starts -->
-										<div class="picture-overlay">
-											<div class="icons">
-												<div><span class="icon"><i class="fa fa-search"></i></span></div>
-											</div>
-										</div>
-										<!-- Picture Overlay Ends -->
-									</a>
-								</li>
-								<li>
-									<img src="images/menu-details/big/5.jpg" alt="" >
-									<a class="image-popup-vertical-fit" href="images/menu-details/big/5.jpg" title="Lorem ipsum dolor sit amet">
-										<!-- Picture Overlay Starts -->
-										<div class="picture-overlay">
-											<div class="icons">
-												<div><span class="icon"><i class="fa fa-search"></i></span></div>
-											</div>
-										</div>
-										<!-- Picture Overlay Ends -->
-									</a>
-								</li>
-								<li>
-									<img src="images/menu-details/big/6.jpg" alt="">
-									<a class="image-popup-vertical-fit" href="images/menu-details/big/6.jpg" title="Lorem ipsum dolor sit amet">
-										<!-- Picture Overlay Starts -->
-										<div class="picture-overlay">
-											<div class="icons">
-												<div><span class="icon"><i class="fa fa-search"></i></span></div>
-											</div>
-										</div>
-										<!-- Picture Overlay Ends -->
-									</a>
-								</li>
+								<?php
+								endforeach;
+								?>
 							</ul>
 						</div>
 						<div id="carousel" class="flexslider">
 							<ul class="slides">
+							<?php
+									$img= explode(',',$menus->images);
+									foreach($img as $im):
+								?>
 								<li>
-									<img src="images/menu-details/thumbs/1.jpg" alt="">
+									<img src="images/<?php echo $im;?>" alt="">
 								</li>
-								<li>
-									<img src="images/menu-details/thumbs/2.jpg" alt="">
-								</li>
-								<li>
-									<img src="images/menu-details/thumbs/3.jpg" alt="">
-								</li>
-								<li>
-									<img src="images/menu-details/thumbs/4.jpg" alt="">
-								</li>
-								<li>
-									<img src="images/menu-details/thumbs/5.jpg" alt="">
-								</li>
-								<li>
-									<img src="images/menu-details/thumbs/6.jpg" alt="">
-								</li>
+								<?php
+								endforeach;
+								?>
+							
 							</ul>
 						</div>
 					</div>
@@ -121,7 +84,7 @@ require './config/header.php';
 					<div class="col-lg-6 col-md-6 animated" data-animation="fadeInUp" data-animation-delay="400">
 						<div class="herotext clearfix">
 							<div class="pull-left">
-								<h1>Hawashi Bread</h1>
+								<h1><?php echo $menus->nom;?></h1>
 								<div class="line"></div>
 								<div class="star">
 									<ul>
@@ -133,13 +96,14 @@ require './config/header.php';
 									</ul>
 								</div>
 							</div>
-							<div class="price pull-right">$88.00</div>
+							<div class="price pull-right"><?php echo $menus->px;?> FCFA</div>
 						</div>
 						<div class="description">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br><br> 
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br>
-							Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-						</div>
+						<?php echo $menus->description1;
+							echo '\n';
+							echo  $menus->description2;
+						?>	
+					</div>
 						<!-- Add to Cart Starts -->	
 						<div class="row add-to-cart">
 							<div class="col-lg-6">
@@ -152,16 +116,9 @@ require './config/header.php';
 										<option value="">5</option>
 									</select>
 								</div>
-								<div class="button"><a href="shop-cart.php" class="fill-orange">Add to cart</a></div>
+								<div class="button"><a href="shop-cart.php?id_menu=<?php echo $menus->id;?>" class="fill-orange">Ajouter au panier</a></div>
 							</div>
-							<div class="col-lg-6">
-								<ul class="social-icons">
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-									<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
+						
 						</div>
 						<!-- Add to Cart Ends -->
 					</div>
@@ -177,7 +134,7 @@ require './config/header.php';
 							</li>
 							<li role="presentation">
 								<a href="#review" aria-controls="review" role="tab" data-toggle="tab">
-									<div class="caption">REVIEW[10]</div>
+									<div class="caption">Commentaires</div>
 								</a>
 							</li>
 						</ul>
@@ -185,9 +142,8 @@ require './config/header.php';
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane fade in active" id="description">
 								<div class="description">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-								</div>
+								<?php echo $menus->description1;?>
+							</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="review">
 								<div class="description">
@@ -195,50 +151,30 @@ require './config/header.php';
 									<div class="row comments">
 										<div class="col-lg-12">
 											<ul class="media-list">
-												<!-- Media Start with nested Comments Starts -->
-												<li class="media">
-													<div class="media-left">
-														<a href="#">
-														<img src="images/blog/users/1.jpg" class="media-object" alt="" >
-														</a>
-													</div>
-													<div class="media-body">
-														<h4 class="media-heading">Fatma Mahmoud</h4>
-														<div class="time"><i class="fa fa-calendar" aria-hidden="true"></i> Posted on 5 Dec, 2015 at 2:15 pm</div>
-														<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae pre vitae dicta sunt explicabo. 
-														</p>
-														<a href="#" class="reply"><i class="fa fa-reply" aria-hidden="true"></i></a>
-														<!-- Nested media object -->
-														<div class="media">
-															<div class="media-left">
-																<a href="#">
-																<img src="images/blog/users/2.jpg" class="media-object" alt="" >
-																</a>
-															</div>
-															<div class="media-body">
-																<h4 class="media-heading">Amany Arafa</h4>
-																<div class="time"><i class="fa fa-calendar" aria-hidden="true"></i> Posted on 5 Dec, 2015 at 2:15 pm</div>
-																<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae pre vitae dicta sunt explicabo. </p>
-																<a href="#" class="reply"><i class="fa fa-reply" aria-hidden="true"></i></a>													
-															</div>
-														</div>
-													</div>
-												</li>
-												<!-- Media Start with nested Comments Ends -->
+											<?php
+											if(isset($reps)&&($reps!=null)):
+												foreach($reps as $rep):
+											?>
 												<!-- Media Single Comment Starts -->
 												<li class="media">
 													<div class="media-left">
 														<a href="#">
-														<img src="images/blog/users/3.jpg" class="media-object" alt="" >
+														<!-- <img src="images/blog/users/3.jpg" class="media-object" alt="" > -->
 														</a>
 													</div>
 													<div class="media-body">
-														<h4 class="media-heading">Jameel Ameen</h4>
-														<div class="time"><i class="fa fa-calendar" aria-hidden="true"></i> Posted on 5 Dec, 2015 at 2:15 pm</div>
-														<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae pre vitae dicta sunt explicabo. </p>
+														<h4 class="media-heading">Anonymous</h4>
+														<div class="time"><i class="fa fa-calendar" aria-hidden="true"></i> </div>
+														<p> <?php
+														echo $rep->revmessage;
+														?> </p>
 														<a href="#" class="reply"><i class="fa fa-reply" aria-hidden="true"></i></a>
 													</div>
 												</li>
+												<?php
+												endforeach;
+											endif;
+												?>
 												<!-- Media Single Comment Starts -->
 											</ul>
 										</div>
@@ -247,32 +183,18 @@ require './config/header.php';
 									<!-- Leave a Reply Starts -->
 									<div class="row leave-a-reply">
 										<div class="col-lg-12">
-											<h1>Add Your Review</h1>
+											<h1>Ajouter un commentaire</h1>
 											<div class="line"></div>
 											<div class="row">
-												<div class="col-lg-4 col-md-4 col-sm-4">
-													<div class="form-group">
-														<input type="text" class="form-control" id="Name" placeholder="Full Name *">
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-4">
-													<div class="form-group">
-														<input type="email" class="form-control" id="Email" placeholder="Email Address *">
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-4">
-													<div class="form-group">
-														<input type="text" class="form-control" id="Website" placeholder="Subject *">
-													</div>
-												</div>
+												
 												<div class="col-lg-12">
-													<div class="form-group">
-														<textarea class="form-control" rows="5" placeholder="Comment *"></textarea>
+													<div class="form-group"><form action="./menu-details.php" method="POST">
+														<textarea class="form-control" rows="5" name="commentaire" placeholder="Commentaire *"></textarea>
 													</div>
 												</div>
 												<div class="col-lg-12">
 													<button type="submit" class="btn btn-default">Submit</button>
-												</div>
+												</div></form>
 											</div>
 										</div>
 									</div>
@@ -292,68 +214,42 @@ require './config/header.php';
 					<div class="row">
 						<div class="herotext animated" data-animation="fadeInUp" data-animation-delay="400">
 							<p class="box-heading">
-								<span>Related Recipies</span>
+								<span>QuelQues Menus</span>
 							</p>
 						</div>
 					</div>
 					<div class="row">
+						<?php
+						if(isset($mens)&&($mens!=null)):
+							foreach($mens as $men): //men==menu
+								$img= explode(',',$men->images);
+						?>
 						<div class="col-lg-4 col-md-4 animated" data-animation="fadeInUp" data-animation-delay="600">
 							<div class="picture">
-								<img src="images/related-recipies/1.jpg" class="img-responsive" alt=""/>                       
+								<img src="images/<?php echo $img[0];?>" class="img-responsive" alt=""/>                       
 								<!-- Picture Overlay Starts -->
 								<div class="portfolio-overlay-2">
 									<div class="icons">
 										<div>
-											<h1>Food Name</h1>
+											<h1><?php echo $men->nom;?></h1>
 											<p class="line"></p>
-											 <p class="price-item"><span>35<sup>$</sup></span></p>
+											 <p class="price-item"><span><?php echo $men->px;?><sup>FCFA</sup></span></p>
                                             <p class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-empty"></i></p>
-											<span class="icon"><a class="#">Add to cart</a> | <a class="#" href="./menu-details.php">Detail</a></span>
+											<span class="icon"><a class="#" href="./shop-cart.php?id_menu=<?php echo $men->id;?>">Ajouter Au panier</a> | <a class="#" href="./menu-details.php?id_menu=<?php echo $men->id;?>">Detail</a></span>
 										</div>
 									</div>
 								</div>
 								<!-- Picture Overlay Ends -->
 							</div>
 						</div>
-						<div class="col-lg-4 col-md-4 animated" data-animation="fadeInUp" data-animation-delay="800">
-							<div class="picture">
-								<img src="images/related-recipies/2.jpg" class="img-responsive" alt=""/>                       
-								<!-- Picture Overlay Starts -->
-								<div class="portfolio-overlay-2">
-									<div class="icons">
-										<div>
-											<h1>Food Name</h1>
-											<p class="line"></p>
-											 <p class="price-item"><span>35<sup>$</sup></span></p>
-                                            <p class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-empty"></i></p>
-											<span class="icon"><a class="#">Add to cart</a> | <a class="#" href="./menu-details.php">Detail</a></span>
-										</div>
-									</div>
-								</div>
-								<!-- Picture Overlay Ends -->
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 animated" data-animation="fadeInUp" data-animation-delay="1000">
-							<div class="picture">
-								<img src="images/related-recipies/3.jpg" class="img-responsive" alt=""/>                       
-								<!-- Picture Overlay Starts -->
-								<div class="portfolio-overlay-2">
-									<div class="icons">
-										<div>
-											<h1>Food Name</h1>
-											<p class="line"></p>
-											 <p class="price-item"><span>35<sup>$</sup></span></p>
-                                            <p class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-empty"></i></p>
-											<span class="icon"><a class="#">Add to cart</a> | <a class="#" href="./menu-details.php">Detail</a></span>
-										</div>
-									</div>
-								</div>
-								<!-- Picture Overlay Ends -->
-							</div>
-						</div>
+						<?php
+						endforeach;
+					endif;
+						?>
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 			<!-- /. RELATED RECIPIE STARTS
 				========================================================================= --> 
 			<!-- NEWSLETTER STARTS

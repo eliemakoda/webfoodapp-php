@@ -66,7 +66,7 @@ require './config/header.php';
 								foreach($menus as $men):
 								?>
 								<div class="menu-item">
-									<h1><a href="menu-details.php?id_menu=<?php echo $men->id ?>"><?php echo $men->nom ?></a><span class="price pull-right"><?php echo $men->px ?> FCFA<a href="addcart"><i class="fa fa-shopping-cart"></i></a></span></h1>
+									<h1><a href="menu-details.php?id_menu=<?php echo $men->id ?>"><?php echo $men->nom ?></a><span class="price pull-right"><?php echo $men->px ?> FCFA<a href="./shop-cart.php?id_menu=<?php echo $men->id ?> "><i class="fa fa-shopping-cart"></i></a></span></h1>
 									<div class="description"><?php echo $men->description1 ?></div>
 								</div>
 								<?php

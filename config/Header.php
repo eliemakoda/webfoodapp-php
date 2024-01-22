@@ -1,3 +1,7 @@
+
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 	
@@ -16,7 +20,7 @@
 		<div id="right"></div>
 		<div id="top"></div>
 		<div id="bottom"></div>
-
+	
 		<div id="preloader">
 			<div id="status">
 				<a href="./admin/">
@@ -51,6 +55,10 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbar">
 					<ul class="nav navbar-nav" data-hover="dropdown" data-animations="fadeIn fadeIn fadeInUp fadeInLeft">
+
+					<?php
+				if(isset($_SESSION['email_client'])):
+		?>
 							<li class="pull-left"><a class="navbar-brand hidden-sm hidden-xs light-logo" href=""><img src="./images/logos/logo.jpg"  alt="" class="rounded-circle" height="100" width="100"></a> <a class="navbar-brand hidden-sm hidden-xs dark-logo" href="#"><img src="images/logos/logo-nav-dark.png" alt=""></a></li>
 						<li class="dropdown shop_cart pull-right">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>8</span></a>
@@ -132,7 +140,7 @@
 							<a href="our-menu.php" class="dropdown-toggle nav-menu" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false">MENU</a>
 
 						</li>
-						<li><a href="reservation.php" class="nav-menu">RESERVATION</a></li>
+						<li><a href="reservation.php" class="nav-menu">RESERVATION </a></li>
 						<li class="dropdown">
 							<a href="blog.php" class="-toggle nav-menu" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false">BLOG</a>
 						
@@ -142,11 +150,20 @@
 							<a href="shop-cart.php" class="dropdown-toggle nav-menu" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false">CARTS</a>
 						
 						</li>
+						<li><a href="about-us.php" class="nav-menu">ABOUT US </a></li>
+						<li><a href="contact-us.php" class="nav-menu">CONTACT</a></li>
+						<li><a href="./logout.php" class="nav-menu">LOGOUT</a></li>
+
+						<?php else:?>
+							<li class="dropdown">
+							<a href="index.php" class=" nav-menu" data-toggle="" role="button" aria-haspopup="true" aria-expanded="false">HOME</a>
+						
+						</li>
 						<li><a href="contact-us.php" class="nav-menu">CONTACT</a></li>
 						<li><a href="login.php" class="nav-menu">LOGIN</a></li>
 						<li><a href="signup-my-account.php" class="nav-menu">SIGNUP</a></li>
 						<li><a href="about-us.php" class="nav-menu">ABOUT US </a></li>
-
+					<?php endif;?>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->

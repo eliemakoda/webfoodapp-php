@@ -101,7 +101,7 @@ class App{
                 //début des sessions
                 session_start();
                 $_SESSION['email_client']= $resultat['email'];
-                $_SESSION['nom_client']= $resultat['nom'];
+                $_SESSION['nom_client']= $resultat['name'];
                 $_SESSION['id_client']= $resultat['id'];
                 header("location: ".$destination."");
             }else {

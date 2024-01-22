@@ -159,7 +159,7 @@ require './config/header.php';
 						<div class="col-lg-12">
 							<div class="herotext">
 								<h1 class="animated" data-animation="fadeInUp" data-animation-delay="200">Delivery At Home, Offices, Party Or Events</h1>
-								<div class="button animated" data-animation="fadeInUp" data-animation-delay="500"><a href="#" class="fill-orange">View the Menu</a></div>
+								<div class="button animated" data-animation="fadeInUp" data-animation-delay="500"><a href="./our-menu.php" class="fill-orange">View the Menu</a></div>
 							</div>
 						</div>
 					</div>

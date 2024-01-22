@@ -1,4 +1,8 @@
 <?php
+require "./config/app.php";
+$req="SELECT * FROM publication WHERE 1";
+$apps= new App;
+$posts= $apps->SelectionnerTout($req);
 require './config/header.php';
 ?>
 		<div class="inner-banner title-area text-center image-6">
@@ -17,138 +21,42 @@ require './config/header.php';
 			<div class="blog" id="blog">
 				<div class="container">
 					<!-- Post Starts -->
+					<?php
+					if(isset($posts)&& ($posts!=null)):
+						foreach($posts as $post):
+							$im= explode(',',$post->images)
+					?>
 					<div class="row blog-post">
 						<div class="col-lg-8 col-md-8 animated" data-animation="fadeIn" data-animation-delay="800">
-							<div class="picture"><img src="images/blog/1.jpg" class="img-responsive center-block" alt=""></div>
+							<div class="picture"><img src="images/<?php echo $im[0];?>" class="img-responsive center-block" alt=""></div>
 						</div>
 						<div class="col-lg-4 col-md-4">
 							<div class="blog-contents animated" data-animation="fadeIn" data-animation-delay="1000">
-								<h1 class="post-title"><a href="#">Cooking Food With Love</a></h1>
-								<div class="post-metas">April 18, 2015 In <a class="" href="#">Recipe</a></div>
+								<h1 class="post-title"><a href="#"><?php echo $post->title;?></a></h1>
+								<div class="post-metas"><?php echo $post->date;?> <a class="" href="#">Recipe</a></div>
 								<div class="line"></div>
 								<div class="post-desc">
-									Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...
-								</div>
-								<div class="button"><a class="fill-orange" href="blog-details-video.php">Read more</a></div>
+									
+								<?php
+								$description = $post->description;
+								$words = str_word_count($description, 1); // Divise la chaîne en mots
+								$first20Words = array_slice($words, 0, 20); // Sélectionne les 20 premiers mots
+								echo implode(' ', $first20Words); // Affiche les mots séparés par un espace
+							?>
+							</div>
+								<div class="button"><a class="fill-orange" href="blog-details-video.php?id=<?php echo $post->id;?>">Read more</a></div>
 							</div>
 						</div>
 					</div>
-					<!-- Post Ends -->
-					<!-- Post Starts -->
-					<div class="row blog-post">
-						<div class="col-lg-8 col-md-8 pull-right animated" data-animation="fadeIn" data-animation-delay="400">
-							<div class="picture"><img src="images/blog/2.jpg" class="img-responsive center-block" alt=""></div>
-						</div>
-						<div class="col-lg-4 col-md-4">
-							<div class="blog-contents animated" data-animation="fadeIn" data-animation-delay="600">
-								<h1 class="post-title"><a href="#">Food for Healthy Living</a></h1>
-								<div class="post-metas">April 18, 2015 In <a class="" href="#">Health</a></div>
-								<div class="line"></div>
-								<div class="post-desc">
-									Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...
-								</div>
-								<div class="button"><a class="fill-orange" href="blog-details-video.php">Read more</a></div>
-							</div>
-						</div>
-					</div>
-					<!-- Post Ends -->
-					<!-- Post Starts -->
-					<div class="row blog-post">
-						<div class="col-lg-8 col-md-8 animated" data-animation="fadeIn" data-animation-delay="400">
-							<div class="picture"><img src="images/blog/3.jpg" class="img-responsive center-block" alt=""></div>
-						</div>
-						<div class="col-lg-4 col-md-4">
-							<div class="blog-contents animated" data-animation="fadeIn" data-animation-delay="600">
-								<h1 class="post-title"><a href="#">Come &amp; Taste our Experiences</a></h1>
-								<div class="post-metas">April 18, 2015 In <a class="" href="#">Recipe</a></div>
-								<div class="line"></div>
-								<div class="post-desc">
-									Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...
-								</div>
-								<div class="button"><a class="fill-orange" href="blog-details-video.php">Read more</a></div>
-							</div>
-						</div>
-					</div>
-					<!-- Post Ends -->					
-					<!-- Post Starts -->
-					<div class="row blog-post">
-						<div class="col-lg-8 col-md-8 pull-right animated" data-animation="fadeIn" data-animation-delay="400">
-							<div class="picture"><img src="images/blog/4.jpg" class="img-responsive center-block" alt=""></div>
-						</div>
-						<div class="col-lg-4 col-md-4">
-							<div class="blog-contents animated" data-animation="fadeIn" data-animation-delay="600">
-								<h1 class="post-title"><a href="#">Tired? Come & Take a Rest</a></h1>
-								<div class="post-metas">April 18, 2015 In <a class="" href="#">Recipe</a></div>
-								<div class="line"></div>
-								<div class="post-desc">
-									Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...
-								</div>
-								<div class="button"><a class="fill-orange" href="blog-details-video.php">Read more</a></div>
-							</div>
-						</div>
-					</div>
-					<!-- Post Ends -->
-					<!-- Post Starts -->
-					<div class="row blog-post">
-						<div class="col-lg-8 col-md-8 animated" data-animation="fadeIn" data-animation-delay="400">
-							<div class="picture"><img src="images/blog/5.jpg" class="img-responsive center-block" alt=""></div>
-						</div>
-						<div class="col-lg-4 col-md-4">
-							<div class="blog-contents animated" data-animation="fadeIn" data-animation-delay="600">
-								<h1 class="post-title"><a href="#">Meet our Prof Chef !</a></h1>
-								<div class="post-metas">April 18, 2015 In <a class="" href="#">Recipe</a></div>
-								<div class="line"></div>
-								<div class="post-desc">
-									Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...
-								</div>
-								<div class="button"><a class="fill-orange" href="blog-details-video.php">Read more</a></div>
-							</div>
-						</div>
-					</div>
-					<!-- Post Ends -->
-					<!-- Post Starts -->
-					<div class="row blog-post">
-						<div class="col-lg-8 col-md-8 pull-right animated" data-animation="fadeIn" data-animation-delay="400">
-							<div class="picture"><img src="images/blog/6.jpg" class="img-responsive center-block" alt=""></div>
-						</div>
-						<div class="col-lg-4 col-md-4">
-							<div class="blog-contents animated" data-animation="fadeIn" data-animation-delay="600">
-								<h1 class="post-title"><a href="#">Happy Christmas</a></h1>
-								<div class="post-metas">April 18, 2015 In <a class="" href="#">Recipe</a></div>
-								<div class="line"></div>
-								<div class="post-desc">
-									Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...
-								</div>
-								<div class="button"><a class="fill-orange" href="blog-details-video.php">Read more</a></div>
-							</div>
-						</div>
-					</div>
-					<!-- Post Ends -->
+					<?php
+					endforeach;
+				endif;
+					?>
+				<!-- fin des publication -->
 					<!-- Pagging Starts -->
 					<div class="row">
-						<div class="col-lg-6 col-md-6 col-sm-6">
-							<ul class="pagination pull-left">
-								<li>
-									<a href="#" aria-label="Previous">
-									<span aria-hidden="true">Previous</span>
-									</a>
-								</li>
-								<li>
-									<a href="#" aria-label="Next">
-									<span aria-hidden="true">Next</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6">
-							<ul class="pagination pull-right">
-								<li><a href="#">1</a></li>
-								<li class="active"><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-							</ul>
-						</div>
+						
+						
 					</div>
 					<!-- Pagging Ends -->
 				</div>
