@@ -58,8 +58,8 @@ $nb=$apps->SelectionnerUn($sql_nb);
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand visible-sm visible-xs light-logo" href=""><img src="./images/logos/logo.jpg"  alt=""  height="150" width="250" class="rounded-circle"></a>
-					<a class="navbar-brand visible-sm visible-xs dark-logo" href=""><img src="./images/logos/logo.jpg"  alt=""  height="150" width="250" class="rounded-circle"></a>
+					<!-- <a class="navbar-brand visible-sm visible-xs light-logo" href=""><img src="./images/logos/logo.jpg"  alt=""  height="150" width="250" class="rounded-circle"></a>
+					<a class="navbar-brand visible-sm visible-xs dark-logo" href=""><img src="./images/logos/logo.jpg"  alt=""  height="150" width="250" class="rounded-circle"></a> -->
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbar">
@@ -68,7 +68,7 @@ $nb=$apps->SelectionnerUn($sql_nb);
 					<?php
 				if(isset($_SESSION['email_client'])):
 		?>
-							<li class="pull-left"><a class="navbar-brand hidden-sm hidden-xs light-logo" href=""><img src="./images/logos/logo.jpg"  alt="" class="rounded-circle" height="100" width="100"></a> <a class="navbar-brand hidden-sm hidden-xs dark-logo" href="#"><img src="images/logos/logo-nav-dark.png" alt=""></a></li>
+							<!-- <li class="pull-left"><a class="navbar-brand hidden-sm hidden-xs light-logo" href=""><img src="./images/logos/logo.jpg"  alt="" class="rounded-circle" height="100" width="100"></a> <a class="navbar-brand hidden-sm hidden-xs dark-logo" href="#"><img src="images/logos/logo-nav-dark.png" alt=""></a></li> -->
 						<li class="dropdown shop_cart pull-right">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span><?php echo $nb->nb_art ?></span></a>
 							<ul class="dropdown-menu">
@@ -80,9 +80,10 @@ $nb=$apps->SelectionnerUn($sql_nb);
 												<?php if(isset($menuss)&&($menuss!=null)):
 													foreach($menuss as $men):
 														$img= explode(',',$men->images);
+														$myim=$img[array_rand($img)]
 													?>
 												<div class="item clearfix">
-													<a href=""><img src="images/<?php echo $img[0] ?>" alt="" class="rounded"></a>
+													<a href=""><img src="images/<?php echo $myim ?>" alt="" class="rounded"></a>
 													<div class="item_desc">
 														<div class="row1 clearfix">
 															<a href="#"><?php echo $men->nom;?></a>

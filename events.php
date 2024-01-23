@@ -1,6 +1,7 @@
 <?php
 session_start();
-require './header.php';
+require './config/app.php';
+require './config/Header.php';
 ?>
 		<div class="inner-banner title-area text-center image-8">
 			<div class="container title-area-content">

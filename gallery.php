@@ -1,5 +1,7 @@
 <?php
-require './header.php';
+require './config/app.php';
+require './config/Header.php';
+// require './header.php';
 ?>
 		<div class="inner-banner title-area text-center image-4">
 			<div class="container title-area-content">

@@ -7,7 +7,7 @@ $sql= "SELECT * FROM menu WHERE id=$id_menu";
 $menu=$apps->SelectionnerTout($sql);
 $repmen="SELECT * FROM  menureview WHERE id_menu=$id_menu";
 $reps= $apps->SelectionnerTout($repmen);
-$sqlmen="SELECT * FROM menu WHERE 1 LIMIT 1;";
+$sqlmen="SELECT * FROM menu WHERE 1 LIMIT 3;";
 $mens=$apps->SelectionnerTout($sqlmen);
 if(isset($_POST['submit']))
 {
@@ -26,9 +26,9 @@ require './config/header.php';
 		<div class="inner-banner title-area text-center image-5">
 			<div class="container title-area-content">
 				<h1 class="animated" data-animation="fadeInUp" data-animation-delay="200">Menu</h1>
-				<h2 class="animated" data-animation="fadeInDown" data-animation-delay="200">BROWSE ALL DELICIOUS FOODS CATEGORY</h2>
+				<h2 class="animated" data-animation="fadeInDown" data-animation-delay="200">Détail du Menu</h2>
 				<div class="line animated" data-animation="fadeInDown" data-animation-delay="400"></div>
-                <div class="bread-crumb"><a href="#">Home</a> <a href="#">Menu</a> <span>Menu Details</span></div>
+                <div class="bread-crumb"><a href="#">Accueil</a> <a href="#">Menu</a> <span>Détail du Menu</span></div>
 			</div>
 		</div>
 		<!-- /. INNER BANNER STARTS
@@ -230,7 +230,7 @@ require './config/header.php';
 						?>
 						<div class="col-lg-4 col-md-4 animated" data-animation="fadeInUp" data-animation-delay="600">
 							<div class="picture">
-								<img src="images/<?php echo $img[0];?>" class="img-responsive" alt=""/>                       
+								<img src="images/<?php echo $img[array_rand($img)];?>" class="img-responsive" alt=""/>                       
 								<!-- Picture Overlay Starts -->
 								<div class="portfolio-overlay-2">
 									<div class="icons">
