@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 18 jan. 2024 à 16:34
+-- Généré le : jeu. 25 jan. 2024 à 07:05
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.1.12
 
@@ -35,6 +35,13 @@ CREATE TABLE `admin` (
   `added_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `admin`
+--
+
+INSERT INTO `admin` (`id`, `email`, `nom`, `password`, `added_date`) VALUES
+(2, 'christelletotto@gmail.com', 'Jeannette Totto', '$2y$10$Q8DYLNLDAciJwtD1GvPY0OQft8YuZKNAtfP60/5iesQ5oMBpVsiM6', '2024-01-22 13:45:00');
+
 -- --------------------------------------------------------
 
 --
@@ -59,6 +66,11 @@ CREATE TABLE `categorie` (
   `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `categorie`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -71,6 +83,11 @@ CREATE TABLE `contact` (
   `email` varchar(255) DEFAULT NULL,
   `message` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `contact`
+--
+
 
 -- --------------------------------------------------------
 
@@ -89,6 +106,10 @@ CREATE TABLE `menu` (
   `id_categorie` int(11) DEFAULT NULL,
   `id_admin` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `menu`
+--
 
 -- --------------------------------------------------------
 
@@ -115,6 +136,11 @@ CREATE TABLE `menureview` (
   `id_menu` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `menureview`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -125,6 +151,11 @@ CREATE TABLE `newsletter` (
   `id` int(11) NOT NULL,
   `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `newsletter`
+--
+
 
 -- --------------------------------------------------------
 
@@ -140,6 +171,27 @@ CREATE TABLE `publication` (
   `images` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `publication`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `replique`
+--
+
+CREATE TABLE `replique` (
+  `id` int(11) NOT NULL,
+  `id_utilisateur` int(11) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `id_post` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `replique`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -150,7 +202,7 @@ CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `date_livraison` date DEFAULT NULL,
+  `date_livraison` varchar(15) DEFAULT NULL,
   `heure_livraison` time DEFAULT NULL,
   `nb_personne` int(11) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
@@ -158,6 +210,11 @@ CREATE TABLE `reservation` (
   `message` text DEFAULT NULL,
   `statut` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `reservation`
+--
+
 
 -- --------------------------------------------------------
 
@@ -168,8 +225,14 @@ CREATE TABLE `reservation` (
 CREATE TABLE `team` (
   `id` int(11) NOT NULL,
   `position` varchar(100) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL
+  `name` varchar(100) DEFAULT NULL,
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `team`
+--
+
 
 -- --------------------------------------------------------
 
@@ -184,13 +247,11 @@ CREATE TABLE `user` (
   `password` varchar(100) DEFAULT NULL,
   `added_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-CREATE TABLE replique (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_utilisateur INT,
-    message TEXT,
-    id_post INT,
-    FOREIGN KEY (id_post) REFERENCES publication(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user`
+--
+
 
 --
 -- Index pour les tables déchargées
@@ -259,6 +320,13 @@ ALTER TABLE `publication`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `replique`
+--
+ALTER TABLE `replique`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_post` (`id_post`);
+
+--
 -- Index pour la table `reservation`
 --
 ALTER TABLE `reservation`
@@ -285,31 +353,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `menureply`
@@ -321,37 +389,43 @@ ALTER TABLE `menureply`
 -- AUTO_INCREMENT pour la table `menureview`
 --
 ALTER TABLE `menureview`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `newsletter`
 --
 ALTER TABLE `newsletter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `replique`
+--
+ALTER TABLE `replique`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
@@ -390,8 +464,10 @@ ALTER TABLE `menureview`
   ADD CONSTRAINT `menureview_ibfk_1` FOREIGN KEY (`id_menu`) REFERENCES `menu` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `reservation`
+-- Contraintes pour la table `replique`
 --
+ALTER TABLE `replique`
+  ADD CONSTRAINT `replique_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `publication` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

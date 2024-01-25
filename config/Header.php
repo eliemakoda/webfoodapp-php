@@ -142,6 +142,8 @@ $nb=$apps->SelectionnerUn($sql_nb);
 						
 						</li>
 						<li><a href="about-us.php" class="nav-menu">ABOUT US </a></li>
+						<li><a href="our-team.php" class="nav-menu">EQUIPE </a></li>
+
 						<li><a href="contact-us.php" class="nav-menu">CONTACT</a></li>
 						<li><a href="./logout.php" class="nav-menu">LOGOUT</a></li>
 
@@ -154,6 +156,8 @@ $nb=$apps->SelectionnerUn($sql_nb);
 						<li><a href="login.php" class="nav-menu">LOGIN</a></li>
 						<li><a href="signup-my-account.php" class="nav-menu">SIGNUP</a></li>
 						<li><a href="about-us.php" class="nav-menu">ABOUT US </a></li>
+						<li><a href="our-team.php" class="nav-menu">EQUIPE </a></li>
+
 					<?php endif;?>
 					</ul>
 				</div>

@@ -39,7 +39,7 @@ require '../header/header.php';
                   <tr>
                     <th scope="row"><?php echo $i; ?></th>
                     <td><?php echo $news->email; ?></td>
-                    <td><a  type="submit" href="./admins.php?id_sup=<?php echo $news->id; ?>" class="btn btn-danger">supprimer</a>
+                    <td><a  type="submit" href="./news.php?id_sup=<?php echo $news->id; ?>" class="btn btn-danger">supprimer</a>
                   </td>
 
                   </tr>
